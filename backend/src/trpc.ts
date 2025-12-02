@@ -1,18 +1,28 @@
 import { initTRPC } from '@trpc/server'
+import { z } from 'zod'
 
-const ideas = [
-  { nick: 'nice-edia-nice-1', name: 'Idea 1', description: 'Description for Idea 1...' },
-  { nick: 'nice-edia-nice-2', name: 'Idea 2', description: 'Description for Idea 2...' },
-  { nick: 'nice-edia-nice-3', name: 'Idea 3', description: 'Description for Idea 3...' },
-  { nick: 'nice-edia-nice-4', name: 'Idea 4', description: 'Description for Idea 4...' },
-  { nick: 'nice-edia-nice-5', name: 'Idea 5', description: 'Description for Idea 5...' },
-]
+const ideas = Array.from({ length: 100 }).map((_, i) => ({
+  nick: `nice-idea-nice-${i + 1}`,
+  name: `Idea ${i + 1}`,
+  description: `Description for Idea ${i + 1}...`,
+  text: Array.from({ length: 50 }, (_, j) => `<p>Text paragrph ${j} of idea ${i}...</p>`).join(''),
+}))
 
 const trpc = initTRPC.create()
 
 export const trpcRouter = trpc.router({
   getIdeas: trpc.procedure.query(() => {
-    return { ideas }
+    return {
+      ideas: ideas.map((idea) => ({
+        nick: idea.nick,
+        name: idea.name,
+        description: idea.description,
+      })),
+    }
+  }),
+  getIdea: trpc.procedure.input(z.object({ nick: z.string() })).query(({ input }) => {
+    const idea = ideas.find((idea) => idea.nick === input.nick)
+    return { idea: idea || null }
   }),
 })
 
