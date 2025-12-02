@@ -2,7 +2,7 @@
 set -e
 
 # Форматируем staged файлы
-pnpm lint-staged
+pnpm lint-staged --allow-empty
 
 # Проверка типов TypeScript
 pnpm types
