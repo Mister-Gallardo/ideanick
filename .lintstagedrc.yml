@@ -1,13 +1,10 @@
 backend/**/*.{ts,tsx,js,jsx}:
   - 'pnpm -F @ideanick/backend exec eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix'
   - 'pnpm -F @ideanick/backend exec prettier --log-level warn --write'
-  - 'git add'
 
 webapp/**/*.{ts,tsx,js,jsx}:
   - 'pnpm -F @ideanick/webapp exec eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix'
   - 'pnpm -F @ideanick/webapp exec prettier --log-level warn --write'
-  - 'git add'
 
 '**/*.{json,yml,yaml,scss,css,md}':
   - 'prettier --log-level warn --write'
-  - 'git add'
