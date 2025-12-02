@@ -1,1 +1,8 @@
-pnpm test
+#!/bin/sh
+set -e
+
+# Форматируем staged файлы
+pnpm lint-staged
+
+# Проверка типов TypeScript
+pnpm types

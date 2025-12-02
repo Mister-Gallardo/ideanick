@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "types": "tsc --noEmit --project tsconfig.json && tsc --noEmit --project tsconfig.node.json && tsc --noEmit --project tsconfig.app.json",
     "preview": "vite preview",
-    "prettify": "prettier --log-level warn --write 'src/**/*.{ts,tsx,js,json,yml,css,scss,md}'"
+    "prettify": "prettier --log-level warn --write \"src/**/*.{ts,tsx,js,json,yml,scss}\" \"*.{ts,tsx,js,json,yml,scss}\""
   },
   "dependencies": {
     "@ideanick/backend": "workspace:*",

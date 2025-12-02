@@ -7,7 +7,7 @@
     "build": "rimraf ./dist && tsc -p tsconfig.json",
     "start": "node ./dist/index.js",
     "types": "tsc --noEmit --project ./tsconfig.json",
-    "prettify": "prettier --log-level warn --write 'src/**/*.{ts,tsx,js,json,yml,scss}'"
+    "prettify": "prettier --log-level warn --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'"
   },
   "dependencies": {
     "@trpc/server": "^11.7.2",
