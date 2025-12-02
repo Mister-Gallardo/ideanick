@@ -1,6 +1,10 @@
-import { initTRPC } from '@trpc/server'
 import { z } from 'zod'
 
+
+
+
+
+import { initTRPC } from "@trpc/server"
 const ideas = Array.from({ length: 100 }).map((_, i) => ({
   nick: `nice-idea-nice-${i + 1}`,
   name: `Idea ${i + 1}`,
@@ -26,4 +30,9 @@ export const trpcRouter = trpc.router({
   }),
 })
 
-export type TrpcRouter = typeof trpcRouter
+ 
+
+
+
+
+        export type TrpcRouter = typeof trpcRouter

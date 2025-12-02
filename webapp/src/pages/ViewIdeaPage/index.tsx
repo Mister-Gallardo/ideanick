@@ -1,6 +1,7 @@
-import { useParams } from 'react-router-dom'
-
 import { trpc } from '../../lib/trpc'
+
+import { useParams } from "react-router-dom"
+
 
 const ViewIdeaPage = () => {
   const { ideaNick } = useParams<{ ideaNick: string }>()
