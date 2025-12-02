@@ -4,6 +4,9 @@ import express from 'express'
 
 import { trpcRouter } from './trpc.js'
 
+const x: number = 5;
+console.log(x);
+
 const expressApp = express()
 
 expressApp.use(cors())

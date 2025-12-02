@@ -6,6 +6,7 @@
     "dev": "tsx watch ./src/index.ts",
     "build": "rimraf ./dist && tsc -p tsconfig.json",
     "start": "node ./dist/index.js",
+    "types": "tsc --noEmit --project ./tsconfig.json",
     "prettify": "prettier --log-level warn --cache --write 'src/**/*.{ts,tsx,js,json,yml,scss}'"
   },
   "dependencies": {
