@@ -1,0 +1,23 @@
+{
+  "name": "@ideanick/backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch ./src/index.ts",
+    "build": "rimraf ./dist && tsc -p tsconfig.json",
+    "start": "node ./dist/index.js",
+    "prettify": "prettier --log-level warn --cache --write 'src/**/*.{ts,tsx,js,json,yml,scss}'"
+  },
+  "dependencies": {
+    "@trpc/server": "^11.7.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
+    "rimraf": "^6.1.2",
+    "tsx": "^4.19.0"
+  }
+}

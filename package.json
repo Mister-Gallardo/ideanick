@@ -1,0 +1,30 @@
+{
+  "name": "ideanick",
+  "version": "0.0.0",
+  "scripts": {
+    "b": "pnpm --filter @ideanick/backend",
+    "w": "pnpm --filter @ideanick/webapp",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "dev": "pnpm -r --parallel dev",
+    "prettify": "pnpm -r --parallel prettify",
+    "lint:b": "pnpm b exec eslint .",
+    "lint:b:fix": "pnpm b exec eslint . --fix",
+    "lint:w": "pnpm w exec eslint .",
+    "lint:w:fix": "pnpm w exec eslint . --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.3",
+    "react-hooks": "^1.0.1",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.48.0"
+  }
+}
