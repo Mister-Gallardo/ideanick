@@ -3,7 +3,7 @@
 
 .segment {
   h1.title {
-    @include mixins.heading1234567123(md, bold);
+    @include mixins.heading(md, bold);
   }
 
   h2.title {
