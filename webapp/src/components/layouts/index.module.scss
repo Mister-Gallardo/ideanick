@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use '../../styles/vars' as *;
+@use '../../styles/mixins';
+
+.layout {
+  display: flex;
+  height: 100%;
+  @include mixins.respond(xs) {
+    flex-direction: column;
+  }
+
+  .header {
+    padding: $unit * 5 $unit * 24 $unit * 5 $unit * 6;
+    border-right: 1px solid map.get($map: $colors, $key: black);
+    @include mixins.respond(xs) {
+      height: auto;
+      border-bottom: 1px solid map.get($map: $colors, $key: black);
+      border-right: none;
+    }
+
+    .logo {
+      @include mixins.h(lg, bold);
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      margin-top: $unit * 6;
+      gap: $unit * 3;
+      @include mixins.respond(xs) {
+        flex-direction: row;
+        gap: $unit * 4;
+      }
+
+      .link {
+        @include mixins.link;
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    padding: $unit * 5 $unit * 8;
+  }
+}

@@ -5,6 +5,8 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './lib/routes/routes.tsx'
 import { TrpcProvider } from './lib/trpc.tsx'
 
+import './styles/global.scss'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <TrpcProvider>

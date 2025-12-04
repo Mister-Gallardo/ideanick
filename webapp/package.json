@@ -27,6 +27,8 @@
     "@vitejs/plugin-react-swc": "^4.2.2",
     "globals": "^16.5.0",
     "prettier": "^3.7.3",
+    "reset-css": "^5.0.2",
+    "sass": "^1.94.2",
     "typescript": "~5.9.3",
     "vite": "^7.2.4"
   }

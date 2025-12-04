@@ -1,0 +1,41 @@
+$colors: (
+  white: #fff,
+  black: #000,
+  blue: #00c,
+  red: #c00,
+);
+
+$font-sizes-h: (
+  xs: 18px,
+  sm: 20px,
+  md: 24px,
+  lg: 30px,
+  xl: 36px,
+);
+
+$font-sizes-p: (
+  xs: 10px,
+  sm: 12px,
+  md: 14px,
+  lg: 16px,
+  xl: 18px,
+);
+
+$font-weights: (
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+);
+
+$breakpoints: (
+  xs: 600px,
+  sm: 900px,
+  md: 1200px,
+);
+
+$unit: 4px;
+
+$default-font-family: 'Helvetica', 'Arial', sans-serif;
+$second-font-family: 'Roboto', 'Arial', sans-serif;

@@ -1,0 +1,20 @@
+@use '../../styles/vars' as *;
+@use '../../styles/mixins';
+
+.title {
+  @include mixins.h(md, bold);
+}
+
+.description {
+  @include mixins.p(md, regular);
+  margin-top: $unit * 2;
+}
+
+.text {
+  @include mixins.p(md, regular);
+  margin-top: $unit * 5;
+
+  & > *:not(:first-child) {
+    margin-top: $unit * 2;
+  }
+}

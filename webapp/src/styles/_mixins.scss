@@ -1,0 +1,34 @@
+@use 'sass:map';
+@use './vars' as *;
+
+@mixin link(
+  $color: map.get($map: $colors, $key: blue),
+  $hoverColor: map.get($map: $colors, $key: red),
+  $font-family: $default-font-family
+) {
+  color: $color;
+  transition: color 200ms ease;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $hoverColor;
+  }
+}
+
+@mixin h($size: 'md', $weight: 'semibold') {
+  font-family: $default-font-family;
+  font-weight: map.get($font-weights, $weight);
+  font-size: map.get($font-sizes-h, $size);
+}
+
+@mixin p($size: 'md', $weight: 'regular') {
+  font-family: $default-font-family;
+  font-weight: map.get($font-weights, $weight);
+  font-size: map.get($font-sizes-p, $size);
+}
+
+@mixin respond($breakpoint) {
+  @media (max-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}

@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom'
 
 import { trpc } from '../../lib/trpc'
 
+import css from './include.module.scss'
+
 const ViewIdeaPage = () => {
   const { ideaNick } = useParams<{ ideaNick: string }>()
 
@@ -25,9 +27,9 @@ const ViewIdeaPage = () => {
 
   return (
     <div>
-      <h1>{data.idea.name}</h1>
-      <p>{data.idea.description}</p>
-      <div dangerouslySetInnerHTML={{ __html: data.idea.text }} />
+      <h1 className={css.title}>{data.idea.name}</h1>
+      <p className={css.description}>{data.idea.description}</p>
+      <div className={css.text} dangerouslySetInnerHTML={{ __html: data.idea.text }} />
     </div>
   )
 }
