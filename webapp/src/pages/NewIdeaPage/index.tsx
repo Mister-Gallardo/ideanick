@@ -1,4 +1,4 @@
-import { Segment } from '../../components/layouts/Segment/Segment'
+import Segment from '../../components/Segment'
 
 // import css from './index.module.scss'
 

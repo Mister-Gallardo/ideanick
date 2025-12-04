@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 
-import { Segment } from '../../components/layouts/Segment/Segment'
+import Segment from '../../components/Segment'
 import { trpc } from '../../lib/trpc'
 
 import css from './include.module.scss'

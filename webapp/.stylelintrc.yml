@@ -10,7 +10,7 @@ rules:
     - message: Expected mixin to be camelCase
   selector-pseudo-element-colon-notation: 'single'
   scss/dollar-variable-empty-line-before: null
-  block-no-empty: null
+  block-no-empty: true
   declaration-empty-line-before: null
   color-function-notation: null
   alpha-value-notation: null

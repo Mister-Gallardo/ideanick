@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Segment } from '../../components/layouts/Segment/Segment'
+import Segment from '../../components/Segment'
 import { getViewIdeaRoute } from '../../lib/routes/routeHelpers'
 import { trpc } from '../../lib/trpc'
 

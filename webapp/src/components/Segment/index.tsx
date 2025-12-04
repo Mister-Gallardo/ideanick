@@ -1,6 +1,6 @@
 import css from './index.module.scss'
 
-export const Segment = ({
+const Segment = ({
   title,
   size = 1,
   description,
@@ -19,3 +19,5 @@ export const Segment = ({
     </div>
   )
 }
+
+export default Segment
