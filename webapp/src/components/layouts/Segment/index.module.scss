@@ -1,0 +1,21 @@
+@use '../../../styles/vars' as *;
+@use '../../../styles/mixins';
+
+.segment {
+  h1.title {
+    @include mixins.heading(md, bold);
+  }
+
+  h2.title {
+    @include mixins.heading(sm, semibold);
+  }
+
+  .description {
+    @include mixins.paragraph(md, regular);
+    margin-top: $unit * 4;
+  }
+
+  .content {
+    margin-top: $unit * 4;
+  }
+}

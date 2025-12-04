@@ -7,8 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "types": "tsc --noEmit --project tsconfig.json && tsc --noEmit --project tsconfig.node.json && tsc --noEmit --project tsconfig.app.json",
-    "preview": "vite preview",
-    "prettify": "prettier --log-level warn --write \"src/**/*.{ts,tsx,js,json,yml,scss}\" \"*.{ts,tsx,js,json,yml,scss}\""
+    "prettify": "prettier --log-level warn --write \"src/**/*.{ts,tsx,js,json,yml,scss}\" \"*.{ts,tsx,js,json,yml,scss}\"",
+    "stylelint": "stylelint --cache --cache-location ./node_modules/.cache/.stylelintcache 'src/**/*.scss'",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@ideanick/backend": "workspace:*",
@@ -29,6 +30,9 @@
     "prettier": "^3.7.3",
     "reset-css": "^5.0.2",
     "sass": "^1.94.2",
+    "stylelint": "^16.26.1",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-standard-scss": "^16.0.0",
     "typescript": "~5.9.3",
     "vite": "^7.2.4"
   }

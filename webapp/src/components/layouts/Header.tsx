@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { getAllIdeasRoute } from '../../lib/routes/routeHelpers'
+import { getAllIdeasRoute, getNewIdeaRoute } from '../../lib/routes/routeHelpers'
 
 import css from './index.module.scss'
 
@@ -11,6 +11,9 @@ const Header = () => (
     <nav className={css.menu}>
       <Link className={css.link} to={getAllIdeasRoute()}>
         All Ideas
+      </Link>
+      <Link className={css.link} to={getNewIdeaRoute()}>
+        New Idea
       </Link>
     </nav>
   </header>

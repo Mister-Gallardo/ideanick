@@ -1,0 +1,6 @@
+@use '../../styles/vars' as *;
+@use '../../styles/mixins';
+
+.title {
+  @include mixins.heading(md, bold);
+}

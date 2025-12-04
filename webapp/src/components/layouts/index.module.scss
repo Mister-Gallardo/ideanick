@@ -19,7 +19,7 @@
     }
 
     .logo {
-      @include mixins.h(lg, bold);
+      @include mixins.heading(lg, bold);
     }
 
     .menu {

@@ -8,6 +8,7 @@
 ) {
   color: $color;
   transition: color 200ms ease;
+
   &:hover,
   &:focus,
   &:active {
@@ -15,13 +16,13 @@
   }
 }
 
-@mixin h($size: 'md', $weight: 'semibold') {
+@mixin heading($size: 'md', $weight: 'semibold') {
   font-family: $default-font-family;
   font-weight: map.get($font-weights, $weight);
   font-size: map.get($font-sizes-h, $size);
 }
 
-@mixin p($size: 'md', $weight: 'regular') {
+@mixin paragraph($size: 'md', $weight: 'regular') {
   font-family: $default-font-family;
   font-weight: map.get($font-weights, $weight);
   font-size: map.get($font-sizes-p, $size);

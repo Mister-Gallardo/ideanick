@@ -6,5 +6,9 @@ webapp/**/*.{ts,tsx,js,jsx}:
   - 'pnpm -F @ideanick/webapp exec eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix'
   - 'pnpm -F @ideanick/webapp exec prettier --log-level warn --write'
 
-'**/*.{json,yml,yaml,scss,css,md}':
+'*.{scss,css}':
+  - 'pnpm -F @ideanick/webapp exec stylelint --cache --cache-location ./node_modules/.cache/.stylelintcache --fix'
+  - 'prettier --log-level warn --write'
+
+'**/*.{json,yml,yaml,md}':
   - 'prettier --log-level warn --write'
