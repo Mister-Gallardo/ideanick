@@ -1,0 +1,9 @@
+@use '../../styles/vars' as *;
+
+.formItems {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: $unit * 3;
+}

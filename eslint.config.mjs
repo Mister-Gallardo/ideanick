@@ -53,6 +53,23 @@ export default defineConfig([
     rules: {
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: [
+                '@ideanick/backend/**',
+                '!@ideanick/backend/**/',
+                '!@ideanick/backend/**/input',
+              ],
+              allowTypeImports: true,
+              message:
+                'Only types and input schemas are allowed to be imported from backend workspace',
+            },
+          ],
+        },
+      ],
       'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     },
   },

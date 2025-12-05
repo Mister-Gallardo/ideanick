@@ -12,7 +12,7 @@ const ViewIdeaPage = () => {
     return <div>Idea nick is missing from URL.</div>
   }
 
-  const { data, error, isError, isLoading, isFetching } = trpc.getIdea.useQuery({ nick: ideaNick })
+  const { data, error, isError, isLoading, isFetching } = trpc.getIdea.useQuery({ ideaNick })
 
   if (isLoading || isFetching) {
     return <div>Loading...</div>

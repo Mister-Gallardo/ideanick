@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use '../../styles/vars' as *;
+@use '../../styles/mixins';
+
+.field {
+  &.disabled {
+    opacity: 0.5;
+  }
+
+  .label {
+    font-weight: map.get($font-weights, bold);
+    margin-bottom: $unit;
+    display: block;
+  }
+
+  .input {
+    display: block;
+    padding: $unit * 2;
+    border: 1px solid map.get($colors, black);
+    border-radius: $unit * 2;
+    background-color: map.get($colors, white);
+    outline: none;
+    width: 100%;
+    max-width: $unit * 50;
+
+    &:focus {
+      border-color: map.get($colors, blue);
+    }
+
+    &.invalid {
+      border-color: map.get($colors, red);
+    }
+  }
+
+  .error {
+    margin-top: $unit * 0.5;
+    color: map.get($colors, red);
+  }
+}
