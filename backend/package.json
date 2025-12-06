@@ -3,22 +3,34 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch ./src/index.ts",
+    "dev": "pnpm pgc && tsx watch ./src/index.ts",
     "build": "rimraf ./dist && tsc -p tsconfig.json",
     "start": "node ./dist/index.js",
+    "pmd": "prisma migrate dev",
+    "pgc": "prisma generate",
     "types": "tsc --noEmit --project ./tsconfig.json",
-    "prettify": "prettier --log-level warn --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'"
+    "prettify": "prettier --log-level warn --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",
+    "prepare": "pnpm pgc"
+  },
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.1.0",
+    "@prisma/client": "^7.1.0",
+    "@prisma/config": "^7.1.0",
     "@trpc/server": "^11.7.2",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "superjson": "^2.2.6",
     "zod": "^4.1.13"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
     "@types/node": "^24.10.1",
+    "prisma": "^7.1.0",
     "rimraf": "^6.1.2",
     "tsx": "^4.19.0"
   }

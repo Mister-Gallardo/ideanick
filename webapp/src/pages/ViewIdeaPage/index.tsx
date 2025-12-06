@@ -28,6 +28,9 @@ const ViewIdeaPage = () => {
 
   return (
     <Segment title={data.idea.name} description={data.idea.description}>
+      <div className={css.createdAt}>
+        Created At: {data.idea.createdAt.toLocaleDateString('ru-RU')}
+      </div>
       <div className={css.text} dangerouslySetInnerHTML={{ __html: data.idea.text }} />
     </Segment>
   )

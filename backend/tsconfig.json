@@ -17,5 +17,5 @@
     "sourceMap": true,
     "isolatedModules": false
   },
-  "include": ["src"]
+  "include": ["src", "prisma"]
 }

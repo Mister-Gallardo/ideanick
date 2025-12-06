@@ -5,7 +5,14 @@ import importPlugin from 'eslint-plugin-import'
 
 export default defineConfig([
   // Глобальные игноры
-  globalIgnores(['node_modules/', '**/dist/', '**/*.d.ts', 'eslint.config.mjs']),
+  globalIgnores([
+    'node_modules/',
+    '**/dist/',
+    '**/*.d.ts',
+    'eslint.config.mjs',
+    'backend/*.config.*',
+    'backend/generated/'
+  ]),
 
   // Базовые правила JS
   eslintJs.configs.recommended,

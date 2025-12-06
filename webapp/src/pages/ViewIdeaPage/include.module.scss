@@ -1,6 +1,11 @@
 @use '../../styles/vars' as *;
 @use '../../styles/mixins';
 
+.createdAt {
+  font-size: $unit * 3;
+  margin-bottom: $unit * 3;
+}
+
 .text {
   @include mixins.paragraph(md, regular);
   margin-top: $unit * 5;
