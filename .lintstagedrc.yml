@@ -1,10 +1,19 @@
-'**/*.{ts,tsx,js,jsx}':
-  - pnpm dlx eslint --cache --fix
-  - pnpm dlx prettier --write
+# Backend files:
+'backend/**/*.{ts,tsx,js,jsx}':
+  # Используем команду eslint напрямую. lint-staged добавит пути к файлам.
+  - 'eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix'
+  - 'prettier --log-level warn --write' # prettier можно вызывать напрямую, если он в PATH
 
+# Webapp files:
+'webapp/**/*.{ts,tsx,js,jsx}':
+  - 'eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix'
+  - 'prettier --log-level warn --write'
+
+# Styles:
 '**/*.{scss,css}':
-  - pnpm dlx stylelint --fix
-  - pnpm dlx prettier --write
+  - 'pnpm -F @ideanick/webapp exec stylelint --cache --cache-location ./node_modules/.cache/.stylelintcache --fix'
+  - 'prettier --log-level warn --write'
 
+# Config files:
 '**/*.{json,yml,yaml,md}':
-  - pnpm dlx prettier --write
+  - 'prettier --log-level warn --write'
