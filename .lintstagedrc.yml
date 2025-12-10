@@ -1,14 +1,10 @@
-backend/**/*.{ts,tsx,js,jsx}:
-  - 'pnpm eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix'
-  - 'pnpm prettier --log-level warn --write'
+'**/*.{ts,tsx,js,jsx}':
+  - pnpm dlx eslint --cache --fix
+  - pnpm dlx prettier --write
 
-webapp/**/*.{ts,tsx,js,jsx}:
-  - 'pnpm eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix'
-  - 'pnpm prettier --log-level warn --write'
-
-'*.{scss,css}':
-  - 'pnpm -F @ideanick/webapp exec stylelint --cache --cache-location ./node_modules/.cache/.stylelintcache --fix'
-  - 'prettier --log-level warn --write'
+'**/*.{scss,css}':
+  - pnpm dlx stylelint --fix
+  - pnpm dlx prettier --write
 
 '**/*.{json,yml,yaml,md}':
-  - 'prettier --log-level warn --write'
+  - pnpm dlx prettier --write
