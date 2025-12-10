@@ -2,6 +2,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 import tseslint from 'typescript-eslint'
 import eslintJs from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
+import nodePlugin from 'eslint-plugin-n'
 
 export default defineConfig([
   // Глобальные игноры
@@ -11,7 +12,7 @@ export default defineConfig([
     '**/*.d.ts',
     'eslint.config.mjs',
     'backend/*.config.*',
-    'backend/generated/'
+    'backend/generated/',
   ]),
 
   // Базовые правила JS
@@ -47,10 +48,14 @@ export default defineConfig([
   // 🟦 BACKEND rules
   {
     files: ['backend/**/*.ts'],
+    plugins: {
+      n: nodePlugin,
+    },
     rules: {
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': 'off',
+      'n/no-process-env': 'error',
     },
   },
 
@@ -78,6 +83,13 @@ export default defineConfig([
         },
       ],
       'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: '[object.type=MetaProperty][property.name=env]',
+          message: 'Use instead import { env } from "lib/env"',
+        },
+      ],
     },
   },
 ])

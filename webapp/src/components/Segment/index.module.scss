@@ -2,6 +2,10 @@
 @use '../../styles/mixins';
 
 .segment {
+  & + .segment {
+    margin-top: $unit * 8;
+  }
+
   h1.title {
     @include mixins.heading(md, bold);
   }

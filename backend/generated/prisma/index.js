@@ -88,13 +88,30 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable',
 })
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  name: 'name',
+  password: 'password',
+  createdAt: 'createdAt',
+}
+
 exports.Prisma.IdeaScalarFieldEnum = {
   id: 'id',
   nick: 'nick',
+  serialNumber: 'serialNumber',
   name: 'name',
   description: 'description',
   text: 'text',
   createdAt: 'createdAt',
+  authorId: 'authorId',
+}
+
+exports.Prisma.IdeaLikeScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  ideaId: 'ideaId',
+  userId: 'userId',
 }
 
 exports.Prisma.SortOrder = {
@@ -107,23 +124,47 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive',
 }
 
+exports.Prisma.UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  name: 'name',
+  password: 'password',
+}
+
+exports.Prisma.IdeaOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  name: 'name',
+  description: 'description',
+  text: 'text',
+  authorId: 'authorId',
+}
+
+exports.Prisma.IdeaLikeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  ideaId: 'ideaId',
+  userId: 'userId',
+}
+
 exports.Prisma.ModelName = {
+  User: 'User',
   Idea: 'Idea',
+  IdeaLike: 'IdeaLike',
 }
 /**
  * Create the Client
  */
 const config = {
-  previewFeatures: [],
+  previewFeatures: ['fullTextSearchPostgres'],
   clientVersion: '7.1.0',
   engineVersion: 'ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba',
   activeProvider: 'postgresql',
   inlineSchema:
-    'generator client {\n  provider = "prisma-client-js"\n  output   = "../generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel Idea {\n  id          String   @id @default(uuid())\n  nick        String   @unique\n  name        String\n  description String\n  text        String\n  createdAt   DateTime @default(now())\n}\n',
+    'generator client {\n  provider        = "prisma-client-js"\n  previewFeatures = ["fullTextSearchPostgres"]\n  output          = "../generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel User {\n  id         String     @id @default(uuid())\n  nick       String     @unique\n  name       String     @default("")\n  password   String\n  createdAt  DateTime   @default(now())\n  ideas      Idea[]\n  ideasLikes IdeaLike[]\n}\n\nmodel Idea {\n  id           String     @id @default(uuid())\n  nick         String     @unique\n  serialNumber Int        @unique @default(autoincrement())\n  name         String\n  description  String\n  text         String\n  createdAt    DateTime   @default(now())\n  authorId     String\n  author       User       @relation(fields: [authorId], references: [id])\n  ideasLikes   IdeaLike[]\n}\n\nmodel IdeaLike {\n  id        String   @id @default(uuid())\n  createdAt DateTime @default(now())\n  idea      Idea     @relation(fields: [ideaId], references: [id])\n  ideaId    String\n  user      User     @relation(fields: [userId], references: [id])\n  userId    String\n\n  @@unique([ideaId, userId])\n}\n',
 }
 
 config.runtimeDataModel = JSON.parse(
-  '{"models":{"Idea":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"nick","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"text","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"}],"dbName":null}},"enums":{},"types":{}}'
+  '{"models":{"User":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"nick","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"password","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"ideas","kind":"object","type":"Idea","relationName":"IdeaToUser"},{"name":"ideasLikes","kind":"object","type":"IdeaLike","relationName":"IdeaLikeToUser"}],"dbName":null},"Idea":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"nick","kind":"scalar","type":"String"},{"name":"serialNumber","kind":"scalar","type":"Int"},{"name":"name","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"text","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"authorId","kind":"scalar","type":"String"},{"name":"author","kind":"object","type":"User","relationName":"IdeaToUser"},{"name":"ideasLikes","kind":"object","type":"IdeaLike","relationName":"IdeaToIdeaLike"}],"dbName":null},"IdeaLike":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"idea","kind":"object","type":"Idea","relationName":"IdeaToIdeaLike"},{"name":"ideaId","kind":"scalar","type":"String"},{"name":"user","kind":"object","type":"User","relationName":"IdeaLikeToUser"},{"name":"userId","kind":"scalar","type":"String"}],"dbName":null}},"enums":{},"types":{}}'
 )
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.compilerWasm = {

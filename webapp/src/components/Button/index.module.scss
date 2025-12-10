@@ -3,14 +3,16 @@
 @use '../../styles/mixins';
 
 .button {
-  padding: 8px 15px;
+  padding: $unit * 2 $unit * 4;
   color: map.get($colors, white);
   background-color: #0a980a;
   border: none;
   font-weight: bold;
   border-radius: $unit;
   cursor: pointer;
+  text-decoration: none;
   user-select: none;
+  position: relative;
 
   &:hover {
     background-color: #21b821;

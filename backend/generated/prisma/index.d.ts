@@ -12,10 +12,20 @@ import $Result = runtime.Types.Result
 export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 /**
+ * Model User
+ *
+ */
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
  * Model Idea
  *
  */
 export type Idea = $Result.DefaultSelection<Prisma.$IdeaPayload>
+/**
+ * Model IdeaLike
+ *
+ */
+export type IdeaLike = $Result.DefaultSelection<Prisma.$IdeaLikePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -24,8 +34,8 @@ export type Idea = $Result.DefaultSelection<Prisma.$IdeaPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Ideas
- * const ideas = await prisma.idea.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  *
@@ -49,8 +59,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Ideas
-   * const ideas = await prisma.idea.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    *
    *
@@ -165,6 +175,16 @@ export class PrismaClient<
   >
 
   /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
+   * ```
+   */
+  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>
+
+  /**
    * `prisma.idea`: Exposes CRUD operations for the **Idea** model.
    * Example usage:
    * ```ts
@@ -173,6 +193,16 @@ export class PrismaClient<
    * ```
    */
   get idea(): Prisma.IdeaDelegate<ExtArgs, ClientOptions>
+
+  /**
+   * `prisma.ideaLike`: Exposes CRUD operations for the **IdeaLike** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more IdeaLikes
+   * const ideaLikes = await prisma.ideaLike.findMany()
+   * ```
+   */
+  get ideaLike(): Prisma.IdeaLikeDelegate<ExtArgs, ClientOptions>
 }
 
 export namespace Prisma {
@@ -601,7 +631,9 @@ export namespace Prisma {
     : FieldRef<Model, FieldType>
 
   export const ModelName: {
+    User: 'User'
     Idea: 'Idea'
+    IdeaLike: 'IdeaLike'
   }
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -624,10 +656,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: 'idea'
+      modelProps: 'user' | 'idea' | 'ideaLike'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findMany: {
+            args: Prisma.UserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          create: {
+            args: Prisma.UserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          createMany: {
+            args: Prisma.UserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          delete: {
+            args: Prisma.UserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          update: {
+            args: Prisma.UserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUser>
+          }
+          groupBy: {
+            args: Prisma.UserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserCountArgs<ExtArgs>
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
       Idea: {
         payload: Prisma.$IdeaPayload<ExtArgs>
         fields: Prisma.IdeaFieldRefs
@@ -699,6 +805,80 @@ export namespace Prisma {
           count: {
             args: Prisma.IdeaCountArgs<ExtArgs>
             result: $Utils.Optional<IdeaCountAggregateOutputType> | number
+          }
+        }
+      }
+      IdeaLike: {
+        payload: Prisma.$IdeaLikePayload<ExtArgs>
+        fields: Prisma.IdeaLikeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IdeaLikeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IdeaLikeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+          }
+          findFirst: {
+            args: Prisma.IdeaLikeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IdeaLikeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+          }
+          findMany: {
+            args: Prisma.IdeaLikeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>[]
+          }
+          create: {
+            args: Prisma.IdeaLikeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+          }
+          createMany: {
+            args: Prisma.IdeaLikeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IdeaLikeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>[]
+          }
+          delete: {
+            args: Prisma.IdeaLikeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+          }
+          update: {
+            args: Prisma.IdeaLikeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+          }
+          deleteMany: {
+            args: Prisma.IdeaLikeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IdeaLikeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IdeaLikeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>[]
+          }
+          upsert: {
+            args: Prisma.IdeaLikeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+          }
+          aggregate: {
+            args: Prisma.IdeaLikeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIdeaLike>
+          }
+          groupBy: {
+            args: Prisma.IdeaLikeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IdeaLikeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IdeaLikeCountArgs<ExtArgs>
+            result: $Utils.Optional<IdeaLikeCountAggregateOutputType> | number
           }
         }
       }
@@ -814,7 +994,9 @@ export namespace Prisma {
     comments?: runtime.SqlCommenterPlugin[]
   }
   export type GlobalOmitConfig = {
+    user?: UserOmit
     idea?: IdeaOmit
+    ideaLike?: IdeaLikeOmit
   }
 
   /* Types for Logging */
@@ -886,8 +1068,1323 @@ export namespace Prisma {
    */
 
   /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    ideas: number
+    ideasLikes: number
+  }
+
+  export type UserCountOutputTypeSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    ideas?: boolean | UserCountOutputTypeCountIdeasArgs
+    ideasLikes?: boolean | UserCountOutputTypeCountIdeasLikesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountIdeasArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: IdeaWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountIdeasLikesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: IdeaLikeWhereInput
+  }
+
+  /**
+   * Count Type IdeaCountOutputType
+   */
+
+  export type IdeaCountOutputType = {
+    ideasLikes: number
+  }
+
+  export type IdeaCountOutputTypeSelect<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    ideasLikes?: boolean | IdeaCountOutputTypeCountIdeasLikesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * IdeaCountOutputType without action
+   */
+  export type IdeaCountOutputTypeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaCountOutputType
+     */
+    select?: IdeaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * IdeaCountOutputType without action
+   */
+  export type IdeaCountOutputTypeCountIdeasLikesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: IdeaLikeWhereInput
+  }
+
+  /**
    * Models
    */
+
+  /**
+   * Model User
+   */
+
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserMinAggregateOutputType = {
+    id: string | null
+    nick: string | null
+    name: string | null
+    password: string | null
+    createdAt: Date | null
+  }
+
+  export type UserMaxAggregateOutputType = {
+    id: string | null
+    nick: string | null
+    name: string | null
+    password: string | null
+    createdAt: Date | null
+  }
+
+  export type UserCountAggregateOutputType = {
+    id: number
+    nick: number
+    name: number
+    password: number
+    createdAt: number
+    _all: number
+  }
+
+  export type UserMinAggregateInputType = {
+    id?: true
+    nick?: true
+    name?: true
+    password?: true
+    createdAt?: true
+  }
+
+  export type UserMaxAggregateInputType = {
+    id?: true
+    nick?: true
+    name?: true
+    password?: true
+    createdAt?: true
+  }
+
+  export type UserCountAggregateInputType = {
+    id?: true
+    nick?: true
+    name?: true
+    password?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type UserAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which User to aggregate.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned Users
+     **/
+    _count?: true | UserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: UserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+    [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
+  }
+
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      where?: UserWhereInput
+      orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+      by: UserScalarFieldEnum[] | UserScalarFieldEnum
+      having?: UserScalarWhereWithAggregatesInput
+      take?: number
+      skip?: number
+      _count?: UserCountAggregateInputType | true
+      _min?: UserMinAggregateInputType
+      _max?: UserMaxAggregateInputType
+    }
+
+  export type UserGroupByOutputType = {
+    id: string
+    nick: string
+    name: string
+    password: string
+    createdAt: Date
+    _count: UserCountAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof UserGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
+          : GetScalarType<T[P], UserGroupByOutputType[P]>
+      }
+    >
+  >
+
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean
+        nick?: boolean
+        name?: boolean
+        password?: boolean
+        createdAt?: boolean
+        ideas?: boolean | User$ideasArgs<ExtArgs>
+        ideasLikes?: boolean | User$ideasLikesArgs<ExtArgs>
+        _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+      },
+      ExtArgs['result']['user']
+    >
+
+  export type UserSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean
+      nick?: boolean
+      name?: boolean
+      password?: boolean
+      createdAt?: boolean
+    },
+    ExtArgs['result']['user']
+  >
+
+  export type UserSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean
+      nick?: boolean
+      name?: boolean
+      password?: boolean
+      createdAt?: boolean
+    },
+    ExtArgs['result']['user']
+  >
+
+  export type UserSelectScalar = {
+    id?: boolean
+    nick?: boolean
+    name?: boolean
+    password?: boolean
+    createdAt?: boolean
+  }
+
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<
+      'id' | 'nick' | 'name' | 'password' | 'createdAt',
+      ExtArgs['result']['user']
+    >
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ideas?: boolean | User$ideasArgs<ExtArgs>
+    ideasLikes?: boolean | User$ideasLikesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {}
+  export type UserIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {}
+
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: 'User'
+    objects: {
+      ideas: Prisma.$IdeaPayload<ExtArgs>[]
+      ideasLikes: Prisma.$IdeaLikePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<
+      {
+        id: string
+        nick: string
+        name: string
+        password: string
+        createdAt: Date
+      },
+      ExtArgs['result']['user']
+    >
+    composites: {}
+  }
+
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<
+    Prisma.$UserPayload,
+    S
+  >
+
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    UserFindManyArgs,
+    'select' | 'include' | 'distinct' | 'omit'
+  > & {
+    select?: UserCountAggregateInputType | true
+  }
+
+  export interface UserDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User']; meta: { name: 'User' } }
+    /**
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserFindUniqueArgs>(
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Find one User that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Find the first User that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserFindFirstArgs>(
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Users
+     * const users = await prisma.user.findMany()
+     *
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends UserFindManyArgs>(
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+    >
+
+    /**
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
+     * @example
+     * // Create one User
+     * const User = await prisma.user.create({
+     *   data: {
+     *     // ... data to create a User
+     *   }
+     * })
+     *
+     */
+    create<T extends UserCreateArgs>(
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Create many Users.
+     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends UserCreateManyArgs>(
+      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'createManyAndReturn', GlobalOmitOptions>
+    >
+
+    /**
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * @example
+     * // Delete one User
+     * const User = await prisma.user.delete({
+     *   where: {
+     *     // ... filter to delete one User
+     *   }
+     * })
+     *
+     */
+    delete<T extends UserDeleteArgs>(
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * @example
+     * // Update one User
+     * const user = await prisma.user.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends UserUpdateArgs>(
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @example
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends UserDeleteManyArgs>(
+      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends UserUpdateManyArgs>(
+      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'updateManyAndReturn', GlobalOmitOptions>
+    >
+
+    /**
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * @example
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
+     *   create: {
+     *     // ... data to create a User
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserUpsertArgs>(
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.user.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+     **/
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends UserAggregateArgs>(
+      args: Subset<T, UserAggregateArgs>
+    ): Prisma.PrismaPromise<GetUserAggregateType<T>>
+
+    /**
+     * Group by User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends UserGroupByArgs,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    /**
+     * Fields of the User model
+     */
+    readonly fields: UserFieldRefs
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for User.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise'
+    ideas<T extends User$ideasArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$ideasArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$IdeaPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+    >
+    ideasLikes<T extends User$ideasLikesArgs<ExtArgs> = {}>(
+      args?: Subset<T, User$ideasLikesArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+    >
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+  /**
+   * Fields of the User model
+   */
+  interface UserFieldRefs {
+    readonly id: FieldRef<'User', 'String'>
+    readonly nick: FieldRef<'User', 'String'>
+    readonly name: FieldRef<'User', 'String'>
+    readonly password: FieldRef<'User', 'String'>
+    readonly createdAt: FieldRef<'User', 'DateTime'>
+  }
+
+  // Custom InputTypes
+  /**
+   * User findUnique
+   */
+  export type UserFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findFirst
+   */
+  export type UserFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the User
+       */
+      select?: UserSelect<ExtArgs> | null
+      /**
+       * Omit specific fields from the User
+       */
+      omit?: UserOmit<ExtArgs> | null
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: UserInclude<ExtArgs> | null
+      /**
+       * Filter, which Users to fetch.
+       */
+      where?: UserWhereInput
+      /**
+       * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+       *
+       * Determine the order of Users to fetch.
+       */
+      orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+      /**
+       * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+       *
+       * Sets the position for listing Users.
+       */
+      cursor?: UserWhereUniqueInput
+      /**
+       * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+       *
+       * Take `±n` Users from the position of the cursor.
+       */
+      take?: number
+      /**
+       * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+       *
+       * Skip the first `n` Users.
+       */
+      skip?: number
+      distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    }
+
+  /**
+   * User create
+   */
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+  }
+
+  /**
+   * User createMany
+   */
+  export type UserCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User createManyAndReturn
+   */
+  export type UserCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User update
+   */
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to update a User.
+     */
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User updateMany
+   */
+  export type UserUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User updateManyAndReturn
+   */
+  export type UserUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User upsert
+   */
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The filter to search for the User to update in case it exists.
+     */
+    where: UserWhereUniqueInput
+    /**
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     */
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+  }
+
+  /**
+   * User delete
+   */
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User deleteMany
+   */
+  export type UserDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which Users to delete
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * User.ideas
+   */
+  export type User$ideasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Idea
+     */
+    select?: IdeaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Idea
+     */
+    omit?: IdeaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
+    where?: IdeaWhereInput
+    orderBy?: IdeaOrderByWithRelationInput | IdeaOrderByWithRelationInput[]
+    cursor?: IdeaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IdeaScalarFieldEnum | IdeaScalarFieldEnum[]
+  }
+
+  /**
+   * User.ideasLikes
+   */
+  export type User$ideasLikesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    where?: IdeaLikeWhereInput
+    orderBy?: IdeaLikeOrderByWithRelationInput | IdeaLikeOrderByWithRelationInput[]
+    cursor?: IdeaLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IdeaLikeScalarFieldEnum | IdeaLikeScalarFieldEnum[]
+  }
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      /**
+       * Select specific fields to fetch from the User
+       */
+      select?: UserSelect<ExtArgs> | null
+      /**
+       * Omit specific fields from the User
+       */
+      omit?: UserOmit<ExtArgs> | null
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: UserInclude<ExtArgs> | null
+    }
 
   /**
    * Model Idea
@@ -895,63 +2392,93 @@ export namespace Prisma {
 
   export type AggregateIdea = {
     _count: IdeaCountAggregateOutputType | null
+    _avg: IdeaAvgAggregateOutputType | null
+    _sum: IdeaSumAggregateOutputType | null
     _min: IdeaMinAggregateOutputType | null
     _max: IdeaMaxAggregateOutputType | null
+  }
+
+  export type IdeaAvgAggregateOutputType = {
+    serialNumber: number | null
+  }
+
+  export type IdeaSumAggregateOutputType = {
+    serialNumber: number | null
   }
 
   export type IdeaMinAggregateOutputType = {
     id: string | null
     nick: string | null
+    serialNumber: number | null
     name: string | null
     description: string | null
     text: string | null
     createdAt: Date | null
+    authorId: string | null
   }
 
   export type IdeaMaxAggregateOutputType = {
     id: string | null
     nick: string | null
+    serialNumber: number | null
     name: string | null
     description: string | null
     text: string | null
     createdAt: Date | null
+    authorId: string | null
   }
 
   export type IdeaCountAggregateOutputType = {
     id: number
     nick: number
+    serialNumber: number
     name: number
     description: number
     text: number
     createdAt: number
+    authorId: number
     _all: number
+  }
+
+  export type IdeaAvgAggregateInputType = {
+    serialNumber?: true
+  }
+
+  export type IdeaSumAggregateInputType = {
+    serialNumber?: true
   }
 
   export type IdeaMinAggregateInputType = {
     id?: true
     nick?: true
+    serialNumber?: true
     name?: true
     description?: true
     text?: true
     createdAt?: true
+    authorId?: true
   }
 
   export type IdeaMaxAggregateInputType = {
     id?: true
     nick?: true
+    serialNumber?: true
     name?: true
     description?: true
     text?: true
     createdAt?: true
+    authorId?: true
   }
 
   export type IdeaCountAggregateInputType = {
     id?: true
     nick?: true
+    serialNumber?: true
     name?: true
     description?: true
     text?: true
     createdAt?: true
+    authorId?: true
     _all?: true
   }
 
@@ -995,6 +2522,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
+     * Select which fields to average
+     **/
+    _avg?: IdeaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: IdeaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
      * Select which fields to find the minimum value
      **/
     _min?: IdeaMinAggregateInputType
@@ -1023,6 +2562,8 @@ export namespace Prisma {
       take?: number
       skip?: number
       _count?: IdeaCountAggregateInputType | true
+      _avg?: IdeaAvgAggregateInputType
+      _sum?: IdeaSumAggregateInputType
       _min?: IdeaMinAggregateInputType
       _max?: IdeaMaxAggregateInputType
     }
@@ -1030,11 +2571,15 @@ export namespace Prisma {
   export type IdeaGroupByOutputType = {
     id: string
     nick: string
+    serialNumber: number
     name: string
     description: string
     text: string
     createdAt: Date
+    authorId: string
     _count: IdeaCountAggregateOutputType | null
+    _avg: IdeaAvgAggregateOutputType | null
+    _sum: IdeaSumAggregateOutputType | null
     _min: IdeaMinAggregateOutputType | null
     _max: IdeaMaxAggregateOutputType | null
   }
@@ -1056,10 +2601,15 @@ export namespace Prisma {
       {
         id?: boolean
         nick?: boolean
+        serialNumber?: boolean
         name?: boolean
         description?: boolean
         text?: boolean
         createdAt?: boolean
+        authorId?: boolean
+        author?: boolean | UserDefaultArgs<ExtArgs>
+        ideasLikes?: boolean | Idea$ideasLikesArgs<ExtArgs>
+        _count?: boolean | IdeaCountOutputTypeDefaultArgs<ExtArgs>
       },
       ExtArgs['result']['idea']
     >
@@ -1070,10 +2620,13 @@ export namespace Prisma {
     {
       id?: boolean
       nick?: boolean
+      serialNumber?: boolean
       name?: boolean
       description?: boolean
       text?: boolean
       createdAt?: boolean
+      authorId?: boolean
+      author?: boolean | UserDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['idea']
   >
@@ -1084,10 +2637,13 @@ export namespace Prisma {
     {
       id?: boolean
       nick?: boolean
+      serialNumber?: boolean
       name?: boolean
       description?: boolean
       text?: boolean
       createdAt?: boolean
+      authorId?: boolean
+      author?: boolean | UserDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['idea']
   >
@@ -1095,29 +2651,51 @@ export namespace Prisma {
   export type IdeaSelectScalar = {
     id?: boolean
     nick?: boolean
+    serialNumber?: boolean
     name?: boolean
     description?: boolean
     text?: boolean
     createdAt?: boolean
+    authorId?: boolean
   }
 
   export type IdeaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetOmit<
-      'id' | 'nick' | 'name' | 'description' | 'text' | 'createdAt',
+      'id' | 'nick' | 'serialNumber' | 'name' | 'description' | 'text' | 'createdAt' | 'authorId',
       ExtArgs['result']['idea']
     >
+  export type IdeaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    ideasLikes?: boolean | Idea$ideasLikesArgs<ExtArgs>
+    _count?: boolean | IdeaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type IdeaIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IdeaIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $IdeaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: 'Idea'
-    objects: {}
+    objects: {
+      author: Prisma.$UserPayload<ExtArgs>
+      ideasLikes: Prisma.$IdeaLikePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<
       {
         id: string
         nick: string
+        serialNumber: number
         name: string
         description: string
         text: string
         createdAt: Date
+        authorId: string
       },
       ExtArgs['result']['idea']
     >
@@ -1596,6 +3174,20 @@ export namespace Prisma {
     GlobalOmitOptions = {},
   > extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise'
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+    ideasLikes<T extends Idea$ideasLikesArgs<ExtArgs> = {}>(
+      args?: Subset<T, Idea$ideasLikesArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+    >
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1629,10 +3221,12 @@ export namespace Prisma {
   interface IdeaFieldRefs {
     readonly id: FieldRef<'Idea', 'String'>
     readonly nick: FieldRef<'Idea', 'String'>
+    readonly serialNumber: FieldRef<'Idea', 'Int'>
     readonly name: FieldRef<'Idea', 'String'>
     readonly description: FieldRef<'Idea', 'String'>
     readonly text: FieldRef<'Idea', 'String'>
     readonly createdAt: FieldRef<'Idea', 'DateTime'>
+    readonly authorId: FieldRef<'Idea', 'String'>
   }
 
   // Custom InputTypes
@@ -1650,6 +3244,10 @@ export namespace Prisma {
      * Omit specific fields from the Idea
      */
     omit?: IdeaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
     /**
      * Filter, which Idea to fetch.
      */
@@ -1671,6 +3269,10 @@ export namespace Prisma {
      */
     omit?: IdeaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
+    /**
      * Filter, which Idea to fetch.
      */
     where: IdeaWhereUniqueInput
@@ -1690,6 +3292,10 @@ export namespace Prisma {
      * Omit specific fields from the Idea
      */
     omit?: IdeaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
     /**
      * Filter, which Idea to fetch.
      */
@@ -1741,6 +3347,10 @@ export namespace Prisma {
      */
     omit?: IdeaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
+    /**
      * Filter, which Idea to fetch.
      */
     where?: IdeaWhereInput
@@ -1790,6 +3400,10 @@ export namespace Prisma {
        */
       omit?: IdeaOmit<ExtArgs> | null
       /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: IdeaInclude<ExtArgs> | null
+      /**
        * Filter, which Ideas to fetch.
        */
       where?: IdeaWhereInput
@@ -1833,6 +3447,10 @@ export namespace Prisma {
      */
     omit?: IdeaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
+    /**
      * The data needed to create a Idea.
      */
     data: XOR<IdeaCreateInput, IdeaUncheckedCreateInput>
@@ -1870,6 +3488,10 @@ export namespace Prisma {
      */
     data: IdeaCreateManyInput | IdeaCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -1884,6 +3506,10 @@ export namespace Prisma {
      * Omit specific fields from the Idea
      */
     omit?: IdeaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
     /**
      * The data needed to update a Idea.
      */
@@ -1940,6 +3566,10 @@ export namespace Prisma {
      * Limit how many Ideas to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -1954,6 +3584,10 @@ export namespace Prisma {
      * Omit specific fields from the Idea
      */
     omit?: IdeaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
     /**
      * The filter to search for the Idea to update in case it exists.
      */
@@ -1981,6 +3615,10 @@ export namespace Prisma {
      */
     omit?: IdeaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaInclude<ExtArgs> | null
+    /**
      * Filter which Idea to delete.
      */
     where: IdeaWhereUniqueInput
@@ -2003,6 +3641,32 @@ export namespace Prisma {
   }
 
   /**
+   * Idea.ideasLikes
+   */
+  export type Idea$ideasLikesArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    where?: IdeaLikeWhereInput
+    orderBy?: IdeaLikeOrderByWithRelationInput | IdeaLikeOrderByWithRelationInput[]
+    cursor?: IdeaLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IdeaLikeScalarFieldEnum | IdeaLikeScalarFieldEnum[]
+  }
+
+  /**
    * Idea without action
    */
   export type IdeaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
@@ -2015,7 +3679,1232 @@ export namespace Prisma {
        * Omit specific fields from the Idea
        */
       omit?: IdeaOmit<ExtArgs> | null
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: IdeaInclude<ExtArgs> | null
     }
+
+  /**
+   * Model IdeaLike
+   */
+
+  export type AggregateIdeaLike = {
+    _count: IdeaLikeCountAggregateOutputType | null
+    _min: IdeaLikeMinAggregateOutputType | null
+    _max: IdeaLikeMaxAggregateOutputType | null
+  }
+
+  export type IdeaLikeMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    ideaId: string | null
+    userId: string | null
+  }
+
+  export type IdeaLikeMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    ideaId: string | null
+    userId: string | null
+  }
+
+  export type IdeaLikeCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    ideaId: number
+    userId: number
+    _all: number
+  }
+
+  export type IdeaLikeMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    ideaId?: true
+    userId?: true
+  }
+
+  export type IdeaLikeMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    ideaId?: true
+    userId?: true
+  }
+
+  export type IdeaLikeCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    ideaId?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type IdeaLikeAggregateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which IdeaLike to aggregate.
+     */
+    where?: IdeaLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IdeaLikes to fetch.
+     */
+    orderBy?: IdeaLikeOrderByWithRelationInput | IdeaLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: IdeaLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IdeaLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IdeaLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned IdeaLikes
+     **/
+    _count?: true | IdeaLikeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: IdeaLikeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: IdeaLikeMaxAggregateInputType
+  }
+
+  export type GetIdeaLikeAggregateType<T extends IdeaLikeAggregateArgs> = {
+    [P in keyof T & keyof AggregateIdeaLike]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIdeaLike[P]>
+      : GetScalarType<T[P], AggregateIdeaLike[P]>
+  }
+
+  export type IdeaLikeGroupByArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    where?: IdeaLikeWhereInput
+    orderBy?: IdeaLikeOrderByWithAggregationInput | IdeaLikeOrderByWithAggregationInput[]
+    by: IdeaLikeScalarFieldEnum[] | IdeaLikeScalarFieldEnum
+    having?: IdeaLikeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IdeaLikeCountAggregateInputType | true
+    _min?: IdeaLikeMinAggregateInputType
+    _max?: IdeaLikeMaxAggregateInputType
+  }
+
+  export type IdeaLikeGroupByOutputType = {
+    id: string
+    createdAt: Date
+    ideaId: string
+    userId: string
+    _count: IdeaLikeCountAggregateOutputType | null
+    _min: IdeaLikeMinAggregateOutputType | null
+    _max: IdeaLikeMaxAggregateOutputType | null
+  }
+
+  type GetIdeaLikeGroupByPayload<T extends IdeaLikeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IdeaLikeGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof IdeaLikeGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
+            : GetScalarType<T[P], IdeaLikeGroupByOutputType[P]>
+          : GetScalarType<T[P], IdeaLikeGroupByOutputType[P]>
+      }
+    >
+  >
+
+  export type IdeaLikeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetSelect<
+      {
+        id?: boolean
+        createdAt?: boolean
+        ideaId?: boolean
+        userId?: boolean
+        idea?: boolean | IdeaDefaultArgs<ExtArgs>
+        user?: boolean | UserDefaultArgs<ExtArgs>
+      },
+      ExtArgs['result']['ideaLike']
+    >
+
+  export type IdeaLikeSelectCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean
+      createdAt?: boolean
+      ideaId?: boolean
+      userId?: boolean
+      idea?: boolean | IdeaDefaultArgs<ExtArgs>
+      user?: boolean | UserDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['ideaLike']
+  >
+
+  export type IdeaLikeSelectUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = $Extensions.GetSelect<
+    {
+      id?: boolean
+      createdAt?: boolean
+      ideaId?: boolean
+      userId?: boolean
+      idea?: boolean | IdeaDefaultArgs<ExtArgs>
+      user?: boolean | UserDefaultArgs<ExtArgs>
+    },
+    ExtArgs['result']['ideaLike']
+  >
+
+  export type IdeaLikeSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    ideaId?: boolean
+    userId?: boolean
+  }
+
+  export type IdeaLikeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    $Extensions.GetOmit<'id' | 'createdAt' | 'ideaId' | 'userId', ExtArgs['result']['ideaLike']>
+  export type IdeaLikeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      idea?: boolean | IdeaDefaultArgs<ExtArgs>
+      user?: boolean | UserDefaultArgs<ExtArgs>
+    }
+  export type IdeaLikeIncludeCreateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    idea?: boolean | IdeaDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IdeaLikeIncludeUpdateManyAndReturn<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    idea?: boolean | IdeaDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $IdeaLikePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    {
+      name: 'IdeaLike'
+      objects: {
+        idea: Prisma.$IdeaPayload<ExtArgs>
+        user: Prisma.$UserPayload<ExtArgs>
+      }
+      scalars: $Extensions.GetPayloadResult<
+        {
+          id: string
+          createdAt: Date
+          ideaId: string
+          userId: string
+        },
+        ExtArgs['result']['ideaLike']
+      >
+      composites: {}
+    }
+
+  type IdeaLikeGetPayload<S extends boolean | null | undefined | IdeaLikeDefaultArgs> =
+    $Result.GetResult<Prisma.$IdeaLikePayload, S>
+
+  type IdeaLikeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = Omit<
+    IdeaLikeFindManyArgs,
+    'select' | 'include' | 'distinct' | 'omit'
+  > & {
+    select?: IdeaLikeCountAggregateInputType | true
+  }
+
+  export interface IdeaLikeDelegate<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IdeaLike']; meta: { name: 'IdeaLike' } }
+    /**
+     * Find zero or one IdeaLike that matches the filter.
+     * @param {IdeaLikeFindUniqueArgs} args - Arguments to find a IdeaLike
+     * @example
+     * // Get one IdeaLike
+     * const ideaLike = await prisma.ideaLike.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IdeaLikeFindUniqueArgs>(
+      args: SelectSubset<T, IdeaLikeFindUniqueArgs<ExtArgs>>
+    ): Prisma__IdeaLikeClient<
+      $Result.GetResult<
+        Prisma.$IdeaLikePayload<ExtArgs>,
+        T,
+        'findUnique',
+        GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Find one IdeaLike that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IdeaLikeFindUniqueOrThrowArgs} args - Arguments to find a IdeaLike
+     * @example
+     * // Get one IdeaLike
+     * const ideaLike = await prisma.ideaLike.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IdeaLikeFindUniqueOrThrowArgs>(
+      args: SelectSubset<T, IdeaLikeFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__IdeaLikeClient<
+      $Result.GetResult<
+        Prisma.$IdeaLikePayload<ExtArgs>,
+        T,
+        'findUniqueOrThrow',
+        GlobalOmitOptions
+      >,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Find the first IdeaLike that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IdeaLikeFindFirstArgs} args - Arguments to find a IdeaLike
+     * @example
+     * // Get one IdeaLike
+     * const ideaLike = await prisma.ideaLike.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IdeaLikeFindFirstArgs>(
+      args?: SelectSubset<T, IdeaLikeFindFirstArgs<ExtArgs>>
+    ): Prisma__IdeaLikeClient<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'findFirst', GlobalOmitOptions> | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Find the first IdeaLike that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IdeaLikeFindFirstOrThrowArgs} args - Arguments to find a IdeaLike
+     * @example
+     * // Get one IdeaLike
+     * const ideaLike = await prisma.ideaLike.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IdeaLikeFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, IdeaLikeFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__IdeaLikeClient<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'findFirstOrThrow', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Find zero or more IdeaLikes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IdeaLikeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IdeaLikes
+     * const ideaLikes = await prisma.ideaLike.findMany()
+     *
+     * // Get first 10 IdeaLikes
+     * const ideaLikes = await prisma.ideaLike.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const ideaLikeWithIdOnly = await prisma.ideaLike.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends IdeaLikeFindManyArgs>(
+      args?: SelectSubset<T, IdeaLikeFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions>
+    >
+
+    /**
+     * Create a IdeaLike.
+     * @param {IdeaLikeCreateArgs} args - Arguments to create a IdeaLike.
+     * @example
+     * // Create one IdeaLike
+     * const IdeaLike = await prisma.ideaLike.create({
+     *   data: {
+     *     // ... data to create a IdeaLike
+     *   }
+     * })
+     *
+     */
+    create<T extends IdeaLikeCreateArgs>(
+      args: SelectSubset<T, IdeaLikeCreateArgs<ExtArgs>>
+    ): Prisma__IdeaLikeClient<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'create', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Create many IdeaLikes.
+     * @param {IdeaLikeCreateManyArgs} args - Arguments to create many IdeaLikes.
+     * @example
+     * // Create many IdeaLikes
+     * const ideaLike = await prisma.ideaLike.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends IdeaLikeCreateManyArgs>(
+      args?: SelectSubset<T, IdeaLikeCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IdeaLikes and returns the data saved in the database.
+     * @param {IdeaLikeCreateManyAndReturnArgs} args - Arguments to create many IdeaLikes.
+     * @example
+     * // Create many IdeaLikes
+     * const ideaLike = await prisma.ideaLike.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many IdeaLikes and only return the `id`
+     * const ideaLikeWithIdOnly = await prisma.ideaLike.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends IdeaLikeCreateManyAndReturnArgs>(
+      args?: SelectSubset<T, IdeaLikeCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$IdeaLikePayload<ExtArgs>,
+        T,
+        'createManyAndReturn',
+        GlobalOmitOptions
+      >
+    >
+
+    /**
+     * Delete a IdeaLike.
+     * @param {IdeaLikeDeleteArgs} args - Arguments to delete one IdeaLike.
+     * @example
+     * // Delete one IdeaLike
+     * const IdeaLike = await prisma.ideaLike.delete({
+     *   where: {
+     *     // ... filter to delete one IdeaLike
+     *   }
+     * })
+     *
+     */
+    delete<T extends IdeaLikeDeleteArgs>(
+      args: SelectSubset<T, IdeaLikeDeleteArgs<ExtArgs>>
+    ): Prisma__IdeaLikeClient<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'delete', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Update one IdeaLike.
+     * @param {IdeaLikeUpdateArgs} args - Arguments to update one IdeaLike.
+     * @example
+     * // Update one IdeaLike
+     * const ideaLike = await prisma.ideaLike.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends IdeaLikeUpdateArgs>(
+      args: SelectSubset<T, IdeaLikeUpdateArgs<ExtArgs>>
+    ): Prisma__IdeaLikeClient<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'update', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Delete zero or more IdeaLikes.
+     * @param {IdeaLikeDeleteManyArgs} args - Arguments to filter IdeaLikes to delete.
+     * @example
+     * // Delete a few IdeaLikes
+     * const { count } = await prisma.ideaLike.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends IdeaLikeDeleteManyArgs>(
+      args?: SelectSubset<T, IdeaLikeDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IdeaLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IdeaLikeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IdeaLikes
+     * const ideaLike = await prisma.ideaLike.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends IdeaLikeUpdateManyArgs>(
+      args: SelectSubset<T, IdeaLikeUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IdeaLikes and returns the data updated in the database.
+     * @param {IdeaLikeUpdateManyAndReturnArgs} args - Arguments to update many IdeaLikes.
+     * @example
+     * // Update many IdeaLikes
+     * const ideaLike = await prisma.ideaLike.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more IdeaLikes and only return the `id`
+     * const ideaLikeWithIdOnly = await prisma.ideaLike.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends IdeaLikeUpdateManyAndReturnArgs>(
+      args: SelectSubset<T, IdeaLikeUpdateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<
+      $Result.GetResult<
+        Prisma.$IdeaLikePayload<ExtArgs>,
+        T,
+        'updateManyAndReturn',
+        GlobalOmitOptions
+      >
+    >
+
+    /**
+     * Create or update one IdeaLike.
+     * @param {IdeaLikeUpsertArgs} args - Arguments to update or create a IdeaLike.
+     * @example
+     * // Update or create a IdeaLike
+     * const ideaLike = await prisma.ideaLike.upsert({
+     *   create: {
+     *     // ... data to create a IdeaLike
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IdeaLike we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IdeaLikeUpsertArgs>(
+      args: SelectSubset<T, IdeaLikeUpsertArgs<ExtArgs>>
+    ): Prisma__IdeaLikeClient<
+      $Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'upsert', GlobalOmitOptions>,
+      never,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+
+    /**
+     * Count the number of IdeaLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IdeaLikeCountArgs} args - Arguments to filter IdeaLikes to count.
+     * @example
+     * // Count the number of IdeaLikes
+     * const count = await prisma.ideaLike.count({
+     *   where: {
+     *     // ... the filter for the IdeaLikes we want to count
+     *   }
+     * })
+     **/
+    count<T extends IdeaLikeCountArgs>(
+      args?: Subset<T, IdeaLikeCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IdeaLikeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IdeaLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IdeaLikeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends IdeaLikeAggregateArgs>(
+      args: Subset<T, IdeaLikeAggregateArgs>
+    ): Prisma.PrismaPromise<GetIdeaLikeAggregateType<T>>
+
+    /**
+     * Group by IdeaLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IdeaLikeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends IdeaLikeGroupByArgs,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IdeaLikeGroupByArgs['orderBy'] }
+        : { orderBy?: IdeaLikeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+          ? {
+              [P in HavingFields]: P extends ByFields
+                ? never
+                : P extends string
+                  ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+                  : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+            }[HavingFields]
+          : 'take' extends Keys<T>
+            ? 'orderBy' extends Keys<T>
+              ? ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields]
+              : 'Error: If you provide "take", you also need to provide "orderBy"'
+            : 'skip' extends Keys<T>
+              ? 'orderBy' extends Keys<T>
+                ? ByValid extends True
+                  ? {}
+                  : {
+                      [P in OrderFields]: P extends ByFields
+                        ? never
+                        : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                    }[OrderFields]
+                : 'Error: If you provide "skip", you also need to provide "orderBy"'
+              : ByValid extends True
+                ? {}
+                : {
+                    [P in OrderFields]: P extends ByFields
+                      ? never
+                      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+                  }[OrderFields],
+    >(
+      args: SubsetIntersection<T, IdeaLikeGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetIdeaLikeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    /**
+     * Fields of the IdeaLike model
+     */
+    readonly fields: IdeaLikeFieldRefs
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IdeaLike.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IdeaLikeClient<
+    T,
+    Null = never,
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+    GlobalOmitOptions = {},
+  > extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise'
+    idea<T extends IdeaDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, IdeaDefaultArgs<ExtArgs>>
+    ): Prisma__IdeaClient<
+      | $Result.GetResult<Prisma.$IdeaPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(
+      args?: Subset<T, UserDefaultArgs<ExtArgs>>
+    ): Prisma__UserClient<
+      | $Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow', GlobalOmitOptions>
+      | Null,
+      Null,
+      ExtArgs,
+      GlobalOmitOptions
+    >
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+  /**
+   * Fields of the IdeaLike model
+   */
+  interface IdeaLikeFieldRefs {
+    readonly id: FieldRef<'IdeaLike', 'String'>
+    readonly createdAt: FieldRef<'IdeaLike', 'DateTime'>
+    readonly ideaId: FieldRef<'IdeaLike', 'String'>
+    readonly userId: FieldRef<'IdeaLike', 'String'>
+  }
+
+  // Custom InputTypes
+  /**
+   * IdeaLike findUnique
+   */
+  export type IdeaLikeFindUniqueArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which IdeaLike to fetch.
+     */
+    where: IdeaLikeWhereUniqueInput
+  }
+
+  /**
+   * IdeaLike findUniqueOrThrow
+   */
+  export type IdeaLikeFindUniqueOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which IdeaLike to fetch.
+     */
+    where: IdeaLikeWhereUniqueInput
+  }
+
+  /**
+   * IdeaLike findFirst
+   */
+  export type IdeaLikeFindFirstArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which IdeaLike to fetch.
+     */
+    where?: IdeaLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IdeaLikes to fetch.
+     */
+    orderBy?: IdeaLikeOrderByWithRelationInput | IdeaLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for IdeaLikes.
+     */
+    cursor?: IdeaLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IdeaLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IdeaLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of IdeaLikes.
+     */
+    distinct?: IdeaLikeScalarFieldEnum | IdeaLikeScalarFieldEnum[]
+  }
+
+  /**
+   * IdeaLike findFirstOrThrow
+   */
+  export type IdeaLikeFindFirstOrThrowArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which IdeaLike to fetch.
+     */
+    where?: IdeaLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IdeaLikes to fetch.
+     */
+    orderBy?: IdeaLikeOrderByWithRelationInput | IdeaLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for IdeaLikes.
+     */
+    cursor?: IdeaLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IdeaLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IdeaLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of IdeaLikes.
+     */
+    distinct?: IdeaLikeScalarFieldEnum | IdeaLikeScalarFieldEnum[]
+  }
+
+  /**
+   * IdeaLike findMany
+   */
+  export type IdeaLikeFindManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which IdeaLikes to fetch.
+     */
+    where?: IdeaLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of IdeaLikes to fetch.
+     */
+    orderBy?: IdeaLikeOrderByWithRelationInput | IdeaLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing IdeaLikes.
+     */
+    cursor?: IdeaLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` IdeaLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` IdeaLikes.
+     */
+    skip?: number
+    distinct?: IdeaLikeScalarFieldEnum | IdeaLikeScalarFieldEnum[]
+  }
+
+  /**
+   * IdeaLike create
+   */
+  export type IdeaLikeCreateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IdeaLike.
+     */
+    data: XOR<IdeaLikeCreateInput, IdeaLikeUncheckedCreateInput>
+  }
+
+  /**
+   * IdeaLike createMany
+   */
+  export type IdeaLikeCreateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to create many IdeaLikes.
+     */
+    data: IdeaLikeCreateManyInput | IdeaLikeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IdeaLike createManyAndReturn
+   */
+  export type IdeaLikeCreateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * The data used to create many IdeaLikes.
+     */
+    data: IdeaLikeCreateManyInput | IdeaLikeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IdeaLike update
+   */
+  export type IdeaLikeUpdateArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IdeaLike.
+     */
+    data: XOR<IdeaLikeUpdateInput, IdeaLikeUncheckedUpdateInput>
+    /**
+     * Choose, which IdeaLike to update.
+     */
+    where: IdeaLikeWhereUniqueInput
+  }
+
+  /**
+   * IdeaLike updateMany
+   */
+  export type IdeaLikeUpdateManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * The data used to update IdeaLikes.
+     */
+    data: XOR<IdeaLikeUpdateManyMutationInput, IdeaLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which IdeaLikes to update
+     */
+    where?: IdeaLikeWhereInput
+    /**
+     * Limit how many IdeaLikes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IdeaLike updateManyAndReturn
+   */
+  export type IdeaLikeUpdateManyAndReturnArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * The data used to update IdeaLikes.
+     */
+    data: XOR<IdeaLikeUpdateManyMutationInput, IdeaLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which IdeaLikes to update
+     */
+    where?: IdeaLikeWhereInput
+    /**
+     * Limit how many IdeaLikes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IdeaLike upsert
+   */
+  export type IdeaLikeUpsertArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IdeaLike to update in case it exists.
+     */
+    where: IdeaLikeWhereUniqueInput
+    /**
+     * In case the IdeaLike found by the `where` argument doesn't exist, create a new IdeaLike with this data.
+     */
+    create: XOR<IdeaLikeCreateInput, IdeaLikeUncheckedCreateInput>
+    /**
+     * In case the IdeaLike was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IdeaLikeUpdateInput, IdeaLikeUncheckedUpdateInput>
+  }
+
+  /**
+   * IdeaLike delete
+   */
+  export type IdeaLikeDeleteArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+    /**
+     * Filter which IdeaLike to delete.
+     */
+    where: IdeaLikeWhereUniqueInput
+  }
+
+  /**
+   * IdeaLike deleteMany
+   */
+  export type IdeaLikeDeleteManyArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Filter which IdeaLikes to delete
+     */
+    where?: IdeaLikeWhereInput
+    /**
+     * Limit how many IdeaLikes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IdeaLike without action
+   */
+  export type IdeaLikeDefaultArgs<
+    ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs,
+  > = {
+    /**
+     * Select specific fields to fetch from the IdeaLike
+     */
+    select?: IdeaLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IdeaLike
+     */
+    omit?: IdeaLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IdeaLikeInclude<ExtArgs> | null
+  }
 
   /**
    * Enums
@@ -2031,16 +4920,38 @@ export namespace Prisma {
   export type TransactionIsolationLevel =
     (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
+  export const UserScalarFieldEnum: {
+    id: 'id'
+    nick: 'nick'
+    name: 'name'
+    password: 'password'
+    createdAt: 'createdAt'
+  }
+
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
   export const IdeaScalarFieldEnum: {
     id: 'id'
     nick: 'nick'
+    serialNumber: 'serialNumber'
     name: 'name'
     description: 'description'
     text: 'text'
     createdAt: 'createdAt'
+    authorId: 'authorId'
   }
 
   export type IdeaScalarFieldEnum = (typeof IdeaScalarFieldEnum)[keyof typeof IdeaScalarFieldEnum]
+
+  export const IdeaLikeScalarFieldEnum: {
+    id: 'id'
+    createdAt: 'createdAt'
+    ideaId: 'ideaId'
+    userId: 'userId'
+  }
+
+  export type IdeaLikeScalarFieldEnum =
+    (typeof IdeaLikeScalarFieldEnum)[keyof typeof IdeaLikeScalarFieldEnum]
 
   export const SortOrder: {
     asc: 'asc'
@@ -2055,6 +4966,37 @@ export namespace Prisma {
   }
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+  export const UserOrderByRelevanceFieldEnum: {
+    id: 'id'
+    nick: 'nick'
+    name: 'name'
+    password: 'password'
+  }
+
+  export type UserOrderByRelevanceFieldEnum =
+    (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+  export const IdeaOrderByRelevanceFieldEnum: {
+    id: 'id'
+    nick: 'nick'
+    name: 'name'
+    description: 'description'
+    text: 'text'
+    authorId: 'authorId'
+  }
+
+  export type IdeaOrderByRelevanceFieldEnum =
+    (typeof IdeaOrderByRelevanceFieldEnum)[keyof typeof IdeaOrderByRelevanceFieldEnum]
+
+  export const IdeaLikeOrderByRelevanceFieldEnum: {
+    id: 'id'
+    ideaId: 'ideaId'
+    userId: 'userId'
+  }
+
+  export type IdeaLikeOrderByRelevanceFieldEnum =
+    (typeof IdeaLikeOrderByRelevanceFieldEnum)[keyof typeof IdeaLikeOrderByRelevanceFieldEnum]
 
   /**
    * Field references
@@ -2094,8 +5036,80 @@ export namespace Prisma {
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+
+  /**
    * Deep Input Types
    */
+
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    id?: StringFilter<'User'> | string
+    nick?: StringFilter<'User'> | string
+    name?: StringFilter<'User'> | string
+    password?: StringFilter<'User'> | string
+    createdAt?: DateTimeFilter<'User'> | Date | string
+    ideas?: IdeaListRelationFilter
+    ideasLikes?: IdeaLikeListRelationFilter
+  }
+
+  export type UserOrderByWithRelationInput = {
+    id?: SortOrder
+    nick?: SortOrder
+    name?: SortOrder
+    password?: SortOrder
+    createdAt?: SortOrder
+    ideas?: IdeaOrderByRelationAggregateInput
+    ideasLikes?: IdeaLikeOrderByRelationAggregateInput
+    _relevance?: UserOrderByRelevanceInput
+  }
+
+  export type UserWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string
+      nick?: string
+      AND?: UserWhereInput | UserWhereInput[]
+      OR?: UserWhereInput[]
+      NOT?: UserWhereInput | UserWhereInput[]
+      name?: StringFilter<'User'> | string
+      password?: StringFilter<'User'> | string
+      createdAt?: DateTimeFilter<'User'> | Date | string
+      ideas?: IdeaListRelationFilter
+      ideasLikes?: IdeaLikeListRelationFilter
+    },
+    'id' | 'nick'
+  >
+
+  export type UserOrderByWithAggregationInput = {
+    id?: SortOrder
+    nick?: SortOrder
+    name?: SortOrder
+    password?: SortOrder
+    createdAt?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+  }
+
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<'User'> | string
+    nick?: StringWithAggregatesFilter<'User'> | string
+    name?: StringWithAggregatesFilter<'User'> | string
+    password?: StringWithAggregatesFilter<'User'> | string
+    createdAt?: DateTimeWithAggregatesFilter<'User'> | Date | string
+  }
 
   export type IdeaWhereInput = {
     AND?: IdeaWhereInput | IdeaWhereInput[]
@@ -2103,25 +5117,35 @@ export namespace Prisma {
     NOT?: IdeaWhereInput | IdeaWhereInput[]
     id?: StringFilter<'Idea'> | string
     nick?: StringFilter<'Idea'> | string
+    serialNumber?: IntFilter<'Idea'> | number
     name?: StringFilter<'Idea'> | string
     description?: StringFilter<'Idea'> | string
     text?: StringFilter<'Idea'> | string
     createdAt?: DateTimeFilter<'Idea'> | Date | string
+    authorId?: StringFilter<'Idea'> | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    ideasLikes?: IdeaLikeListRelationFilter
   }
 
   export type IdeaOrderByWithRelationInput = {
     id?: SortOrder
     nick?: SortOrder
+    serialNumber?: SortOrder
     name?: SortOrder
     description?: SortOrder
     text?: SortOrder
     createdAt?: SortOrder
+    authorId?: SortOrder
+    author?: UserOrderByWithRelationInput
+    ideasLikes?: IdeaLikeOrderByRelationAggregateInput
+    _relevance?: IdeaOrderByRelevanceInput
   }
 
   export type IdeaWhereUniqueInput = Prisma.AtLeast<
     {
       id?: string
       nick?: string
+      serialNumber?: number
       AND?: IdeaWhereInput | IdeaWhereInput[]
       OR?: IdeaWhereInput[]
       NOT?: IdeaWhereInput | IdeaWhereInput[]
@@ -2129,20 +5153,27 @@ export namespace Prisma {
       description?: StringFilter<'Idea'> | string
       text?: StringFilter<'Idea'> | string
       createdAt?: DateTimeFilter<'Idea'> | Date | string
+      authorId?: StringFilter<'Idea'> | string
+      author?: XOR<UserScalarRelationFilter, UserWhereInput>
+      ideasLikes?: IdeaLikeListRelationFilter
     },
-    'id' | 'nick'
+    'id' | 'nick' | 'serialNumber'
   >
 
   export type IdeaOrderByWithAggregationInput = {
     id?: SortOrder
     nick?: SortOrder
+    serialNumber?: SortOrder
     name?: SortOrder
     description?: SortOrder
     text?: SortOrder
     createdAt?: SortOrder
+    authorId?: SortOrder
     _count?: IdeaCountOrderByAggregateInput
+    _avg?: IdeaAvgOrderByAggregateInput
     _max?: IdeaMaxOrderByAggregateInput
     _min?: IdeaMinOrderByAggregateInput
+    _sum?: IdeaSumOrderByAggregateInput
   }
 
   export type IdeaScalarWhereWithAggregatesInput = {
@@ -2151,28 +5182,158 @@ export namespace Prisma {
     NOT?: IdeaScalarWhereWithAggregatesInput | IdeaScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<'Idea'> | string
     nick?: StringWithAggregatesFilter<'Idea'> | string
+    serialNumber?: IntWithAggregatesFilter<'Idea'> | number
     name?: StringWithAggregatesFilter<'Idea'> | string
     description?: StringWithAggregatesFilter<'Idea'> | string
     text?: StringWithAggregatesFilter<'Idea'> | string
     createdAt?: DateTimeWithAggregatesFilter<'Idea'> | Date | string
+    authorId?: StringWithAggregatesFilter<'Idea'> | string
+  }
+
+  export type IdeaLikeWhereInput = {
+    AND?: IdeaLikeWhereInput | IdeaLikeWhereInput[]
+    OR?: IdeaLikeWhereInput[]
+    NOT?: IdeaLikeWhereInput | IdeaLikeWhereInput[]
+    id?: StringFilter<'IdeaLike'> | string
+    createdAt?: DateTimeFilter<'IdeaLike'> | Date | string
+    ideaId?: StringFilter<'IdeaLike'> | string
+    userId?: StringFilter<'IdeaLike'> | string
+    idea?: XOR<IdeaScalarRelationFilter, IdeaWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type IdeaLikeOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    ideaId?: SortOrder
+    userId?: SortOrder
+    idea?: IdeaOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    _relevance?: IdeaLikeOrderByRelevanceInput
+  }
+
+  export type IdeaLikeWhereUniqueInput = Prisma.AtLeast<
+    {
+      id?: string
+      ideaId_userId?: IdeaLikeIdeaIdUserIdCompoundUniqueInput
+      AND?: IdeaLikeWhereInput | IdeaLikeWhereInput[]
+      OR?: IdeaLikeWhereInput[]
+      NOT?: IdeaLikeWhereInput | IdeaLikeWhereInput[]
+      createdAt?: DateTimeFilter<'IdeaLike'> | Date | string
+      ideaId?: StringFilter<'IdeaLike'> | string
+      userId?: StringFilter<'IdeaLike'> | string
+      idea?: XOR<IdeaScalarRelationFilter, IdeaWhereInput>
+      user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    },
+    'id' | 'ideaId_userId'
+  >
+
+  export type IdeaLikeOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    ideaId?: SortOrder
+    userId?: SortOrder
+    _count?: IdeaLikeCountOrderByAggregateInput
+    _max?: IdeaLikeMaxOrderByAggregateInput
+    _min?: IdeaLikeMinOrderByAggregateInput
+  }
+
+  export type IdeaLikeScalarWhereWithAggregatesInput = {
+    AND?: IdeaLikeScalarWhereWithAggregatesInput | IdeaLikeScalarWhereWithAggregatesInput[]
+    OR?: IdeaLikeScalarWhereWithAggregatesInput[]
+    NOT?: IdeaLikeScalarWhereWithAggregatesInput | IdeaLikeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<'IdeaLike'> | string
+    createdAt?: DateTimeWithAggregatesFilter<'IdeaLike'> | Date | string
+    ideaId?: StringWithAggregatesFilter<'IdeaLike'> | string
+    userId?: StringWithAggregatesFilter<'IdeaLike'> | string
+  }
+
+  export type UserCreateInput = {
+    id?: string
+    nick: string
+    name?: string
+    password: string
+    createdAt?: Date | string
+    ideas?: IdeaCreateNestedManyWithoutAuthorInput
+    ideasLikes?: IdeaLikeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateInput = {
+    id?: string
+    nick: string
+    name?: string
+    password: string
+    createdAt?: Date | string
+    ideas?: IdeaUncheckedCreateNestedManyWithoutAuthorInput
+    ideasLikes?: IdeaLikeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideas?: IdeaUpdateManyWithoutAuthorNestedInput
+    ideasLikes?: IdeaLikeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideas?: IdeaUncheckedUpdateManyWithoutAuthorNestedInput
+    ideasLikes?: IdeaLikeUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateManyInput = {
+    id?: string
+    nick: string
+    name?: string
+    password: string
+    createdAt?: Date | string
+  }
+
+  export type UserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IdeaCreateInput = {
     id?: string
     nick: string
+    serialNumber?: number
     name: string
     description: string
     text: string
     createdAt?: Date | string
+    author: UserCreateNestedOneWithoutIdeasInput
+    ideasLikes?: IdeaLikeCreateNestedManyWithoutIdeaInput
   }
 
   export type IdeaUncheckedCreateInput = {
     id?: string
     nick: string
+    serialNumber?: number
     name: string
     description: string
     text: string
     createdAt?: Date | string
+    authorId: string
+    ideasLikes?: IdeaLikeUncheckedCreateNestedManyWithoutIdeaInput
   }
 
   export type IdeaUpdateInput = {
@@ -2182,24 +5343,31 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutIdeasNestedInput
+    ideasLikes?: IdeaLikeUpdateManyWithoutIdeaNestedInput
   }
 
   export type IdeaUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     nick?: StringFieldUpdateOperationsInput | string
+    serialNumber?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    ideasLikes?: IdeaLikeUncheckedUpdateManyWithoutIdeaNestedInput
   }
 
   export type IdeaCreateManyInput = {
     id?: string
     nick: string
+    serialNumber?: number
     name: string
     description: string
     text: string
     createdAt?: Date | string
+    authorId: string
   }
 
   export type IdeaUpdateManyMutationInput = {
@@ -2214,10 +5382,59 @@ export namespace Prisma {
   export type IdeaUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     nick?: StringFieldUpdateOperationsInput | string
+    serialNumber?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IdeaLikeCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    idea: IdeaCreateNestedOneWithoutIdeasLikesInput
+    user: UserCreateNestedOneWithoutIdeasLikesInput
+  }
+
+  export type IdeaLikeUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    ideaId: string
+    userId: string
+  }
+
+  export type IdeaLikeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    idea?: IdeaUpdateOneRequiredWithoutIdeasLikesNestedInput
+    user?: UserUpdateOneRequiredWithoutIdeasLikesNestedInput
+  }
+
+  export type IdeaLikeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideaId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IdeaLikeCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    ideaId: string
+    userId: string
+  }
+
+  export type IdeaLikeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IdeaLikeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideaId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2231,6 +5448,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
@@ -2246,30 +5464,53 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type IdeaCountOrderByAggregateInput = {
+  export type IdeaListRelationFilter = {
+    every?: IdeaWhereInput
+    some?: IdeaWhereInput
+    none?: IdeaWhereInput
+  }
+
+  export type IdeaLikeListRelationFilter = {
+    every?: IdeaLikeWhereInput
+    some?: IdeaLikeWhereInput
+    none?: IdeaLikeWhereInput
+  }
+
+  export type IdeaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IdeaLikeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserOrderByRelevanceInput = {
+    fields: UserOrderByRelevanceFieldEnum | UserOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     nick?: SortOrder
     name?: SortOrder
-    description?: SortOrder
-    text?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type IdeaMaxOrderByAggregateInput = {
+  export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     nick?: SortOrder
     name?: SortOrder
-    description?: SortOrder
-    text?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type IdeaMinOrderByAggregateInput = {
+  export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     nick?: SortOrder
     name?: SortOrder
-    description?: SortOrder
-    text?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -2284,6 +5525,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     mode?: QueryMode
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
@@ -2305,12 +5547,409 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type IdeaOrderByRelevanceInput = {
+    fields: IdeaOrderByRelevanceFieldEnum | IdeaOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type IdeaCountOrderByAggregateInput = {
+    id?: SortOrder
+    nick?: SortOrder
+    serialNumber?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type IdeaAvgOrderByAggregateInput = {
+    serialNumber?: SortOrder
+  }
+
+  export type IdeaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nick?: SortOrder
+    serialNumber?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type IdeaMinOrderByAggregateInput = {
+    id?: SortOrder
+    nick?: SortOrder
+    serialNumber?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    text?: SortOrder
+    createdAt?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type IdeaSumOrderByAggregateInput = {
+    serialNumber?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type IdeaScalarRelationFilter = {
+    is?: IdeaWhereInput
+    isNot?: IdeaWhereInput
+  }
+
+  export type IdeaLikeOrderByRelevanceInput = {
+    fields: IdeaLikeOrderByRelevanceFieldEnum | IdeaLikeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type IdeaLikeIdeaIdUserIdCompoundUniqueInput = {
+    ideaId: string
+    userId: string
+  }
+
+  export type IdeaLikeCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    ideaId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type IdeaLikeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    ideaId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type IdeaLikeMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    ideaId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type IdeaCreateNestedManyWithoutAuthorInput = {
+    create?:
+      | XOR<IdeaCreateWithoutAuthorInput, IdeaUncheckedCreateWithoutAuthorInput>
+      | IdeaCreateWithoutAuthorInput[]
+      | IdeaUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?:
+      | IdeaCreateOrConnectWithoutAuthorInput
+      | IdeaCreateOrConnectWithoutAuthorInput[]
+    createMany?: IdeaCreateManyAuthorInputEnvelope
+    connect?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+  }
+
+  export type IdeaLikeCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<IdeaLikeCreateWithoutUserInput, IdeaLikeUncheckedCreateWithoutUserInput>
+      | IdeaLikeCreateWithoutUserInput[]
+      | IdeaLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?:
+      | IdeaLikeCreateOrConnectWithoutUserInput
+      | IdeaLikeCreateOrConnectWithoutUserInput[]
+    createMany?: IdeaLikeCreateManyUserInputEnvelope
+    connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+  }
+
+  export type IdeaUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?:
+      | XOR<IdeaCreateWithoutAuthorInput, IdeaUncheckedCreateWithoutAuthorInput>
+      | IdeaCreateWithoutAuthorInput[]
+      | IdeaUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?:
+      | IdeaCreateOrConnectWithoutAuthorInput
+      | IdeaCreateOrConnectWithoutAuthorInput[]
+    createMany?: IdeaCreateManyAuthorInputEnvelope
+    connect?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+  }
+
+  export type IdeaLikeUncheckedCreateNestedManyWithoutUserInput = {
+    create?:
+      | XOR<IdeaLikeCreateWithoutUserInput, IdeaLikeUncheckedCreateWithoutUserInput>
+      | IdeaLikeCreateWithoutUserInput[]
+      | IdeaLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?:
+      | IdeaLikeCreateOrConnectWithoutUserInput
+      | IdeaLikeCreateOrConnectWithoutUserInput[]
+    createMany?: IdeaLikeCreateManyUserInputEnvelope
+    connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type IdeaUpdateManyWithoutAuthorNestedInput = {
+    create?:
+      | XOR<IdeaCreateWithoutAuthorInput, IdeaUncheckedCreateWithoutAuthorInput>
+      | IdeaCreateWithoutAuthorInput[]
+      | IdeaUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?:
+      | IdeaCreateOrConnectWithoutAuthorInput
+      | IdeaCreateOrConnectWithoutAuthorInput[]
+    upsert?:
+      | IdeaUpsertWithWhereUniqueWithoutAuthorInput
+      | IdeaUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: IdeaCreateManyAuthorInputEnvelope
+    set?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+    disconnect?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+    delete?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+    connect?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+    update?:
+      | IdeaUpdateWithWhereUniqueWithoutAuthorInput
+      | IdeaUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?:
+      | IdeaUpdateManyWithWhereWithoutAuthorInput
+      | IdeaUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: IdeaScalarWhereInput | IdeaScalarWhereInput[]
+  }
+
+  export type IdeaLikeUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<IdeaLikeCreateWithoutUserInput, IdeaLikeUncheckedCreateWithoutUserInput>
+      | IdeaLikeCreateWithoutUserInput[]
+      | IdeaLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?:
+      | IdeaLikeCreateOrConnectWithoutUserInput
+      | IdeaLikeCreateOrConnectWithoutUserInput[]
+    upsert?:
+      | IdeaLikeUpsertWithWhereUniqueWithoutUserInput
+      | IdeaLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IdeaLikeCreateManyUserInputEnvelope
+    set?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    disconnect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    delete?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    update?:
+      | IdeaLikeUpdateWithWhereUniqueWithoutUserInput
+      | IdeaLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?:
+      | IdeaLikeUpdateManyWithWhereWithoutUserInput
+      | IdeaLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IdeaLikeScalarWhereInput | IdeaLikeScalarWhereInput[]
+  }
+
+  export type IdeaUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?:
+      | XOR<IdeaCreateWithoutAuthorInput, IdeaUncheckedCreateWithoutAuthorInput>
+      | IdeaCreateWithoutAuthorInput[]
+      | IdeaUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?:
+      | IdeaCreateOrConnectWithoutAuthorInput
+      | IdeaCreateOrConnectWithoutAuthorInput[]
+    upsert?:
+      | IdeaUpsertWithWhereUniqueWithoutAuthorInput
+      | IdeaUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: IdeaCreateManyAuthorInputEnvelope
+    set?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+    disconnect?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+    delete?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+    connect?: IdeaWhereUniqueInput | IdeaWhereUniqueInput[]
+    update?:
+      | IdeaUpdateWithWhereUniqueWithoutAuthorInput
+      | IdeaUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?:
+      | IdeaUpdateManyWithWhereWithoutAuthorInput
+      | IdeaUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: IdeaScalarWhereInput | IdeaScalarWhereInput[]
+  }
+
+  export type IdeaLikeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?:
+      | XOR<IdeaLikeCreateWithoutUserInput, IdeaLikeUncheckedCreateWithoutUserInput>
+      | IdeaLikeCreateWithoutUserInput[]
+      | IdeaLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?:
+      | IdeaLikeCreateOrConnectWithoutUserInput
+      | IdeaLikeCreateOrConnectWithoutUserInput[]
+    upsert?:
+      | IdeaLikeUpsertWithWhereUniqueWithoutUserInput
+      | IdeaLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IdeaLikeCreateManyUserInputEnvelope
+    set?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    disconnect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    delete?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    update?:
+      | IdeaLikeUpdateWithWhereUniqueWithoutUserInput
+      | IdeaLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?:
+      | IdeaLikeUpdateManyWithWhereWithoutUserInput
+      | IdeaLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IdeaLikeScalarWhereInput | IdeaLikeScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutIdeasInput = {
+    create?: XOR<UserCreateWithoutIdeasInput, UserUncheckedCreateWithoutIdeasInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIdeasInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IdeaLikeCreateNestedManyWithoutIdeaInput = {
+    create?:
+      | XOR<IdeaLikeCreateWithoutIdeaInput, IdeaLikeUncheckedCreateWithoutIdeaInput>
+      | IdeaLikeCreateWithoutIdeaInput[]
+      | IdeaLikeUncheckedCreateWithoutIdeaInput[]
+    connectOrCreate?:
+      | IdeaLikeCreateOrConnectWithoutIdeaInput
+      | IdeaLikeCreateOrConnectWithoutIdeaInput[]
+    createMany?: IdeaLikeCreateManyIdeaInputEnvelope
+    connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+  }
+
+  export type IdeaLikeUncheckedCreateNestedManyWithoutIdeaInput = {
+    create?:
+      | XOR<IdeaLikeCreateWithoutIdeaInput, IdeaLikeUncheckedCreateWithoutIdeaInput>
+      | IdeaLikeCreateWithoutIdeaInput[]
+      | IdeaLikeUncheckedCreateWithoutIdeaInput[]
+    connectOrCreate?:
+      | IdeaLikeCreateOrConnectWithoutIdeaInput
+      | IdeaLikeCreateOrConnectWithoutIdeaInput[]
+    createMany?: IdeaLikeCreateManyIdeaInputEnvelope
+    connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutIdeasNestedInput = {
+    create?: XOR<UserCreateWithoutIdeasInput, UserUncheckedCreateWithoutIdeasInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIdeasInput
+    upsert?: UserUpsertWithoutIdeasInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<
+      XOR<UserUpdateToOneWithWhereWithoutIdeasInput, UserUpdateWithoutIdeasInput>,
+      UserUncheckedUpdateWithoutIdeasInput
+    >
+  }
+
+  export type IdeaLikeUpdateManyWithoutIdeaNestedInput = {
+    create?:
+      | XOR<IdeaLikeCreateWithoutIdeaInput, IdeaLikeUncheckedCreateWithoutIdeaInput>
+      | IdeaLikeCreateWithoutIdeaInput[]
+      | IdeaLikeUncheckedCreateWithoutIdeaInput[]
+    connectOrCreate?:
+      | IdeaLikeCreateOrConnectWithoutIdeaInput
+      | IdeaLikeCreateOrConnectWithoutIdeaInput[]
+    upsert?:
+      | IdeaLikeUpsertWithWhereUniqueWithoutIdeaInput
+      | IdeaLikeUpsertWithWhereUniqueWithoutIdeaInput[]
+    createMany?: IdeaLikeCreateManyIdeaInputEnvelope
+    set?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    disconnect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    delete?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    update?:
+      | IdeaLikeUpdateWithWhereUniqueWithoutIdeaInput
+      | IdeaLikeUpdateWithWhereUniqueWithoutIdeaInput[]
+    updateMany?:
+      | IdeaLikeUpdateManyWithWhereWithoutIdeaInput
+      | IdeaLikeUpdateManyWithWhereWithoutIdeaInput[]
+    deleteMany?: IdeaLikeScalarWhereInput | IdeaLikeScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type IdeaLikeUncheckedUpdateManyWithoutIdeaNestedInput = {
+    create?:
+      | XOR<IdeaLikeCreateWithoutIdeaInput, IdeaLikeUncheckedCreateWithoutIdeaInput>
+      | IdeaLikeCreateWithoutIdeaInput[]
+      | IdeaLikeUncheckedCreateWithoutIdeaInput[]
+    connectOrCreate?:
+      | IdeaLikeCreateOrConnectWithoutIdeaInput
+      | IdeaLikeCreateOrConnectWithoutIdeaInput[]
+    upsert?:
+      | IdeaLikeUpsertWithWhereUniqueWithoutIdeaInput
+      | IdeaLikeUpsertWithWhereUniqueWithoutIdeaInput[]
+    createMany?: IdeaLikeCreateManyIdeaInputEnvelope
+    set?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    disconnect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    delete?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+    update?:
+      | IdeaLikeUpdateWithWhereUniqueWithoutIdeaInput
+      | IdeaLikeUpdateWithWhereUniqueWithoutIdeaInput[]
+    updateMany?:
+      | IdeaLikeUpdateManyWithWhereWithoutIdeaInput
+      | IdeaLikeUpdateManyWithWhereWithoutIdeaInput[]
+    deleteMany?: IdeaLikeScalarWhereInput | IdeaLikeScalarWhereInput[]
+  }
+
+  export type IdeaCreateNestedOneWithoutIdeasLikesInput = {
+    create?: XOR<IdeaCreateWithoutIdeasLikesInput, IdeaUncheckedCreateWithoutIdeasLikesInput>
+    connectOrCreate?: IdeaCreateOrConnectWithoutIdeasLikesInput
+    connect?: IdeaWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutIdeasLikesInput = {
+    create?: XOR<UserCreateWithoutIdeasLikesInput, UserUncheckedCreateWithoutIdeasLikesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIdeasLikesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IdeaUpdateOneRequiredWithoutIdeasLikesNestedInput = {
+    create?: XOR<IdeaCreateWithoutIdeasLikesInput, IdeaUncheckedCreateWithoutIdeasLikesInput>
+    connectOrCreate?: IdeaCreateOrConnectWithoutIdeasLikesInput
+    upsert?: IdeaUpsertWithoutIdeasLikesInput
+    connect?: IdeaWhereUniqueInput
+    update?: XOR<
+      XOR<IdeaUpdateToOneWithWhereWithoutIdeasLikesInput, IdeaUpdateWithoutIdeasLikesInput>,
+      IdeaUncheckedUpdateWithoutIdeasLikesInput
+    >
+  }
+
+  export type UserUpdateOneRequiredWithoutIdeasLikesNestedInput = {
+    create?: XOR<UserCreateWithoutIdeasLikesInput, UserUncheckedCreateWithoutIdeasLikesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIdeasLikesInput
+    upsert?: UserUpsertWithoutIdeasLikesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<
+      XOR<UserUpdateToOneWithWhereWithoutIdeasLikesInput, UserUpdateWithoutIdeasLikesInput>,
+      UserUncheckedUpdateWithoutIdeasLikesInput
+    >
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2324,6 +5963,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
@@ -2349,6 +5989,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -2378,6 +6019,433 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type IdeaCreateWithoutAuthorInput = {
+    id?: string
+    nick: string
+    serialNumber?: number
+    name: string
+    description: string
+    text: string
+    createdAt?: Date | string
+    ideasLikes?: IdeaLikeCreateNestedManyWithoutIdeaInput
+  }
+
+  export type IdeaUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    nick: string
+    serialNumber?: number
+    name: string
+    description: string
+    text: string
+    createdAt?: Date | string
+    ideasLikes?: IdeaLikeUncheckedCreateNestedManyWithoutIdeaInput
+  }
+
+  export type IdeaCreateOrConnectWithoutAuthorInput = {
+    where: IdeaWhereUniqueInput
+    create: XOR<IdeaCreateWithoutAuthorInput, IdeaUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type IdeaCreateManyAuthorInputEnvelope = {
+    data: IdeaCreateManyAuthorInput | IdeaCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IdeaLikeCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    idea: IdeaCreateNestedOneWithoutIdeasLikesInput
+  }
+
+  export type IdeaLikeUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    ideaId: string
+  }
+
+  export type IdeaLikeCreateOrConnectWithoutUserInput = {
+    where: IdeaLikeWhereUniqueInput
+    create: XOR<IdeaLikeCreateWithoutUserInput, IdeaLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type IdeaLikeCreateManyUserInputEnvelope = {
+    data: IdeaLikeCreateManyUserInput | IdeaLikeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IdeaUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: IdeaWhereUniqueInput
+    update: XOR<IdeaUpdateWithoutAuthorInput, IdeaUncheckedUpdateWithoutAuthorInput>
+    create: XOR<IdeaCreateWithoutAuthorInput, IdeaUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type IdeaUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: IdeaWhereUniqueInput
+    data: XOR<IdeaUpdateWithoutAuthorInput, IdeaUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type IdeaUpdateManyWithWhereWithoutAuthorInput = {
+    where: IdeaScalarWhereInput
+    data: XOR<IdeaUpdateManyMutationInput, IdeaUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type IdeaScalarWhereInput = {
+    AND?: IdeaScalarWhereInput | IdeaScalarWhereInput[]
+    OR?: IdeaScalarWhereInput[]
+    NOT?: IdeaScalarWhereInput | IdeaScalarWhereInput[]
+    id?: StringFilter<'Idea'> | string
+    nick?: StringFilter<'Idea'> | string
+    serialNumber?: IntFilter<'Idea'> | number
+    name?: StringFilter<'Idea'> | string
+    description?: StringFilter<'Idea'> | string
+    text?: StringFilter<'Idea'> | string
+    createdAt?: DateTimeFilter<'Idea'> | Date | string
+    authorId?: StringFilter<'Idea'> | string
+  }
+
+  export type IdeaLikeUpsertWithWhereUniqueWithoutUserInput = {
+    where: IdeaLikeWhereUniqueInput
+    update: XOR<IdeaLikeUpdateWithoutUserInput, IdeaLikeUncheckedUpdateWithoutUserInput>
+    create: XOR<IdeaLikeCreateWithoutUserInput, IdeaLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type IdeaLikeUpdateWithWhereUniqueWithoutUserInput = {
+    where: IdeaLikeWhereUniqueInput
+    data: XOR<IdeaLikeUpdateWithoutUserInput, IdeaLikeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type IdeaLikeUpdateManyWithWhereWithoutUserInput = {
+    where: IdeaLikeScalarWhereInput
+    data: XOR<IdeaLikeUpdateManyMutationInput, IdeaLikeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type IdeaLikeScalarWhereInput = {
+    AND?: IdeaLikeScalarWhereInput | IdeaLikeScalarWhereInput[]
+    OR?: IdeaLikeScalarWhereInput[]
+    NOT?: IdeaLikeScalarWhereInput | IdeaLikeScalarWhereInput[]
+    id?: StringFilter<'IdeaLike'> | string
+    createdAt?: DateTimeFilter<'IdeaLike'> | Date | string
+    ideaId?: StringFilter<'IdeaLike'> | string
+    userId?: StringFilter<'IdeaLike'> | string
+  }
+
+  export type UserCreateWithoutIdeasInput = {
+    id?: string
+    nick: string
+    name?: string
+    password: string
+    createdAt?: Date | string
+    ideasLikes?: IdeaLikeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutIdeasInput = {
+    id?: string
+    nick: string
+    name?: string
+    password: string
+    createdAt?: Date | string
+    ideasLikes?: IdeaLikeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutIdeasInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutIdeasInput, UserUncheckedCreateWithoutIdeasInput>
+  }
+
+  export type IdeaLikeCreateWithoutIdeaInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutIdeasLikesInput
+  }
+
+  export type IdeaLikeUncheckedCreateWithoutIdeaInput = {
+    id?: string
+    createdAt?: Date | string
+    userId: string
+  }
+
+  export type IdeaLikeCreateOrConnectWithoutIdeaInput = {
+    where: IdeaLikeWhereUniqueInput
+    create: XOR<IdeaLikeCreateWithoutIdeaInput, IdeaLikeUncheckedCreateWithoutIdeaInput>
+  }
+
+  export type IdeaLikeCreateManyIdeaInputEnvelope = {
+    data: IdeaLikeCreateManyIdeaInput | IdeaLikeCreateManyIdeaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutIdeasInput = {
+    update: XOR<UserUpdateWithoutIdeasInput, UserUncheckedUpdateWithoutIdeasInput>
+    create: XOR<UserCreateWithoutIdeasInput, UserUncheckedCreateWithoutIdeasInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutIdeasInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutIdeasInput, UserUncheckedUpdateWithoutIdeasInput>
+  }
+
+  export type UserUpdateWithoutIdeasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideasLikes?: IdeaLikeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutIdeasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideasLikes?: IdeaLikeUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type IdeaLikeUpsertWithWhereUniqueWithoutIdeaInput = {
+    where: IdeaLikeWhereUniqueInput
+    update: XOR<IdeaLikeUpdateWithoutIdeaInput, IdeaLikeUncheckedUpdateWithoutIdeaInput>
+    create: XOR<IdeaLikeCreateWithoutIdeaInput, IdeaLikeUncheckedCreateWithoutIdeaInput>
+  }
+
+  export type IdeaLikeUpdateWithWhereUniqueWithoutIdeaInput = {
+    where: IdeaLikeWhereUniqueInput
+    data: XOR<IdeaLikeUpdateWithoutIdeaInput, IdeaLikeUncheckedUpdateWithoutIdeaInput>
+  }
+
+  export type IdeaLikeUpdateManyWithWhereWithoutIdeaInput = {
+    where: IdeaLikeScalarWhereInput
+    data: XOR<IdeaLikeUpdateManyMutationInput, IdeaLikeUncheckedUpdateManyWithoutIdeaInput>
+  }
+
+  export type IdeaCreateWithoutIdeasLikesInput = {
+    id?: string
+    nick: string
+    serialNumber?: number
+    name: string
+    description: string
+    text: string
+    createdAt?: Date | string
+    author: UserCreateNestedOneWithoutIdeasInput
+  }
+
+  export type IdeaUncheckedCreateWithoutIdeasLikesInput = {
+    id?: string
+    nick: string
+    serialNumber?: number
+    name: string
+    description: string
+    text: string
+    createdAt?: Date | string
+    authorId: string
+  }
+
+  export type IdeaCreateOrConnectWithoutIdeasLikesInput = {
+    where: IdeaWhereUniqueInput
+    create: XOR<IdeaCreateWithoutIdeasLikesInput, IdeaUncheckedCreateWithoutIdeasLikesInput>
+  }
+
+  export type UserCreateWithoutIdeasLikesInput = {
+    id?: string
+    nick: string
+    name?: string
+    password: string
+    createdAt?: Date | string
+    ideas?: IdeaCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutIdeasLikesInput = {
+    id?: string
+    nick: string
+    name?: string
+    password: string
+    createdAt?: Date | string
+    ideas?: IdeaUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutIdeasLikesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutIdeasLikesInput, UserUncheckedCreateWithoutIdeasLikesInput>
+  }
+
+  export type IdeaUpsertWithoutIdeasLikesInput = {
+    update: XOR<IdeaUpdateWithoutIdeasLikesInput, IdeaUncheckedUpdateWithoutIdeasLikesInput>
+    create: XOR<IdeaCreateWithoutIdeasLikesInput, IdeaUncheckedCreateWithoutIdeasLikesInput>
+    where?: IdeaWhereInput
+  }
+
+  export type IdeaUpdateToOneWithWhereWithoutIdeasLikesInput = {
+    where?: IdeaWhereInput
+    data: XOR<IdeaUpdateWithoutIdeasLikesInput, IdeaUncheckedUpdateWithoutIdeasLikesInput>
+  }
+
+  export type IdeaUpdateWithoutIdeasLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutIdeasNestedInput
+  }
+
+  export type IdeaUncheckedUpdateWithoutIdeasLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    serialNumber?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserUpsertWithoutIdeasLikesInput = {
+    update: XOR<UserUpdateWithoutIdeasLikesInput, UserUncheckedUpdateWithoutIdeasLikesInput>
+    create: XOR<UserCreateWithoutIdeasLikesInput, UserUncheckedCreateWithoutIdeasLikesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutIdeasLikesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutIdeasLikesInput, UserUncheckedUpdateWithoutIdeasLikesInput>
+  }
+
+  export type UserUpdateWithoutIdeasLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideas?: IdeaUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutIdeasLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideas?: IdeaUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type IdeaCreateManyAuthorInput = {
+    id?: string
+    nick: string
+    serialNumber?: number
+    name: string
+    description: string
+    text: string
+    createdAt?: Date | string
+  }
+
+  export type IdeaLikeCreateManyUserInput = {
+    id?: string
+    createdAt?: Date | string
+    ideaId: string
+  }
+
+  export type IdeaUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideasLikes?: IdeaLikeUpdateManyWithoutIdeaNestedInput
+  }
+
+  export type IdeaUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    serialNumber?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideasLikes?: IdeaLikeUncheckedUpdateManyWithoutIdeaNestedInput
+  }
+
+  export type IdeaUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nick?: StringFieldUpdateOperationsInput | string
+    serialNumber?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IdeaLikeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    idea?: IdeaUpdateOneRequiredWithoutIdeasLikesNestedInput
+  }
+
+  export type IdeaLikeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideaId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IdeaLikeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ideaId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IdeaLikeCreateManyIdeaInput = {
+    id?: string
+    createdAt?: Date | string
+    userId: string
+  }
+
+  export type IdeaLikeUpdateWithoutIdeaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutIdeasLikesNestedInput
+  }
+
+  export type IdeaLikeUncheckedUpdateWithoutIdeaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IdeaLikeUncheckedUpdateManyWithoutIdeaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   /**

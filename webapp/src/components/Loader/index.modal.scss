@@ -1,0 +1,19 @@
+@use '../../styles/vars' as *;
+@use '../../styles/mixins';
+
+.loader {
+  &.type-page {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: inherit;
+    height: 100%;
+  }
+
+  &.type-section {
+    position: relative;
+    display: block;
+    height: $unit * 20;
+    width: 100%;
+  }
+}

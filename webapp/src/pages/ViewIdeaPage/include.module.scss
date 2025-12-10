@@ -1,9 +1,16 @@
+@use 'sass:map';
 @use '../../styles/vars' as *;
 @use '../../styles/mixins';
 
 .createdAt {
   font-size: $unit * 3;
   margin-bottom: $unit * 3;
+}
+
+.author {
+  font-weight: map.get($font-weights, medium);
+  font-size: $unit * 4;
+  margin-bottom: $unit * 5;
 }
 
 .text {
@@ -13,4 +20,16 @@
   & > *:not(:first-child) {
     margin-top: $unit * 2;
   }
+}
+
+.likes {
+  margin-top: 20px;
+
+  .likeButton {
+    @include mixins.link;
+  }
+}
+
+.editButton {
+  margin-top: $unit * 5;
 }

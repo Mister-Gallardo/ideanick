@@ -116,13 +116,30 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable',
 })
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  name: 'name',
+  password: 'password',
+  createdAt: 'createdAt',
+}
+
 exports.Prisma.IdeaScalarFieldEnum = {
   id: 'id',
   nick: 'nick',
+  serialNumber: 'serialNumber',
   name: 'name',
   description: 'description',
   text: 'text',
   createdAt: 'createdAt',
+  authorId: 'authorId',
+}
+
+exports.Prisma.IdeaLikeScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  ideaId: 'ideaId',
+  userId: 'userId',
 }
 
 exports.Prisma.SortOrder = {
@@ -135,8 +152,32 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive',
 }
 
+exports.Prisma.UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  name: 'name',
+  password: 'password',
+}
+
+exports.Prisma.IdeaOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  name: 'name',
+  description: 'description',
+  text: 'text',
+  authorId: 'authorId',
+}
+
+exports.Prisma.IdeaLikeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  ideaId: 'ideaId',
+  userId: 'userId',
+}
+
 exports.Prisma.ModelName = {
+  User: 'User',
   Idea: 'Idea',
+  IdeaLike: 'IdeaLike',
 }
 
 /**

@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 
+import { AppContextProvider } from './lib/ctx.tsx'
 import { router } from './lib/routes/routes.tsx'
 import { TrpcProvider } from './lib/trpc.tsx'
 
@@ -10,7 +11,9 @@ import './styles/global.scss'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <TrpcProvider>
-      <RouterProvider router={router} />
+      <AppContextProvider>
+        <RouterProvider router={router} />
+      </AppContextProvider>
     </TrpcProvider>
   </StrictMode>
 )
