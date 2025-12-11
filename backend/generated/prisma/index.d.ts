@@ -28,6 +28,22 @@ export type Idea = $Result.DefaultSelection<Prisma.$IdeaPayload>
 export type IdeaLike = $Result.DefaultSelection<Prisma.$IdeaLikePayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const UserPermission: {
+    BLOCK_IDEAS: 'BLOCK_IDEAS'
+    ALL: 'ALL'
+  }
+
+  export type UserPermission = (typeof UserPermission)[keyof typeof UserPermission]
+}
+
+export type UserPermission = $Enums.UserPermission
+
+export const UserPermission: typeof $Enums.UserPermission
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -1186,6 +1202,7 @@ export namespace Prisma {
     name: number
     password: number
     createdAt: number
+    permissions: number
     _all: number
   }
 
@@ -1211,6 +1228,7 @@ export namespace Prisma {
     name?: true
     password?: true
     createdAt?: true
+    permissions?: true
     _all?: true
   }
 
@@ -1292,6 +1310,7 @@ export namespace Prisma {
     name: string
     password: string
     createdAt: Date
+    permissions: $Enums.UserPermission[]
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1317,6 +1336,7 @@ export namespace Prisma {
         name?: boolean
         password?: boolean
         createdAt?: boolean
+        permissions?: boolean
         ideas?: boolean | User$ideasArgs<ExtArgs>
         ideasLikes?: boolean | User$ideasLikesArgs<ExtArgs>
         _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1333,6 +1353,7 @@ export namespace Prisma {
       name?: boolean
       password?: boolean
       createdAt?: boolean
+      permissions?: boolean
     },
     ExtArgs['result']['user']
   >
@@ -1346,6 +1367,7 @@ export namespace Prisma {
       name?: boolean
       password?: boolean
       createdAt?: boolean
+      permissions?: boolean
     },
     ExtArgs['result']['user']
   >
@@ -1356,11 +1378,12 @@ export namespace Prisma {
     name?: boolean
     password?: boolean
     createdAt?: boolean
+    permissions?: boolean
   }
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetOmit<
-      'id' | 'nick' | 'name' | 'password' | 'createdAt',
+      'id' | 'nick' | 'name' | 'password' | 'createdAt' | 'permissions',
       ExtArgs['result']['user']
     >
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1388,6 +1411,7 @@ export namespace Prisma {
         name: string
         password: string
         createdAt: Date
+        permissions: $Enums.UserPermission[]
       },
       ExtArgs['result']['user']
     >
@@ -1912,6 +1936,7 @@ export namespace Prisma {
     readonly name: FieldRef<'User', 'String'>
     readonly password: FieldRef<'User', 'String'>
     readonly createdAt: FieldRef<'User', 'DateTime'>
+    readonly permissions: FieldRef<'User', 'UserPermission[]'>
   }
 
   // Custom InputTypes
@@ -2415,6 +2440,7 @@ export namespace Prisma {
     text: string | null
     createdAt: Date | null
     authorId: string | null
+    blockedAt: Date | null
   }
 
   export type IdeaMaxAggregateOutputType = {
@@ -2426,6 +2452,7 @@ export namespace Prisma {
     text: string | null
     createdAt: Date | null
     authorId: string | null
+    blockedAt: Date | null
   }
 
   export type IdeaCountAggregateOutputType = {
@@ -2437,6 +2464,7 @@ export namespace Prisma {
     text: number
     createdAt: number
     authorId: number
+    blockedAt: number
     _all: number
   }
 
@@ -2457,6 +2485,7 @@ export namespace Prisma {
     text?: true
     createdAt?: true
     authorId?: true
+    blockedAt?: true
   }
 
   export type IdeaMaxAggregateInputType = {
@@ -2468,6 +2497,7 @@ export namespace Prisma {
     text?: true
     createdAt?: true
     authorId?: true
+    blockedAt?: true
   }
 
   export type IdeaCountAggregateInputType = {
@@ -2479,6 +2509,7 @@ export namespace Prisma {
     text?: true
     createdAt?: true
     authorId?: true
+    blockedAt?: true
     _all?: true
   }
 
@@ -2577,6 +2608,7 @@ export namespace Prisma {
     text: string
     createdAt: Date
     authorId: string
+    blockedAt: Date | null
     _count: IdeaCountAggregateOutputType | null
     _avg: IdeaAvgAggregateOutputType | null
     _sum: IdeaSumAggregateOutputType | null
@@ -2607,6 +2639,7 @@ export namespace Prisma {
         text?: boolean
         createdAt?: boolean
         authorId?: boolean
+        blockedAt?: boolean
         author?: boolean | UserDefaultArgs<ExtArgs>
         ideasLikes?: boolean | Idea$ideasLikesArgs<ExtArgs>
         _count?: boolean | IdeaCountOutputTypeDefaultArgs<ExtArgs>
@@ -2626,6 +2659,7 @@ export namespace Prisma {
       text?: boolean
       createdAt?: boolean
       authorId?: boolean
+      blockedAt?: boolean
       author?: boolean | UserDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['idea']
@@ -2643,6 +2677,7 @@ export namespace Prisma {
       text?: boolean
       createdAt?: boolean
       authorId?: boolean
+      blockedAt?: boolean
       author?: boolean | UserDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['idea']
@@ -2657,11 +2692,20 @@ export namespace Prisma {
     text?: boolean
     createdAt?: boolean
     authorId?: boolean
+    blockedAt?: boolean
   }
 
   export type IdeaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     $Extensions.GetOmit<
-      'id' | 'nick' | 'serialNumber' | 'name' | 'description' | 'text' | 'createdAt' | 'authorId',
+      | 'id'
+      | 'nick'
+      | 'serialNumber'
+      | 'name'
+      | 'description'
+      | 'text'
+      | 'createdAt'
+      | 'authorId'
+      | 'blockedAt',
       ExtArgs['result']['idea']
     >
   export type IdeaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2696,6 +2740,7 @@ export namespace Prisma {
         text: string
         createdAt: Date
         authorId: string
+        blockedAt: Date | null
       },
       ExtArgs['result']['idea']
     >
@@ -3227,6 +3272,7 @@ export namespace Prisma {
     readonly text: FieldRef<'Idea', 'String'>
     readonly createdAt: FieldRef<'Idea', 'DateTime'>
     readonly authorId: FieldRef<'Idea', 'String'>
+    readonly blockedAt: FieldRef<'Idea', 'DateTime'>
   }
 
   // Custom InputTypes
@@ -4926,6 +4972,7 @@ export namespace Prisma {
     name: 'name'
     password: 'password'
     createdAt: 'createdAt'
+    permissions: 'permissions'
   }
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4939,6 +4986,7 @@ export namespace Prisma {
     text: 'text'
     createdAt: 'createdAt'
     authorId: 'authorId'
+    blockedAt: 'blockedAt'
   }
 
   export type IdeaScalarFieldEnum = (typeof IdeaScalarFieldEnum)[keyof typeof IdeaScalarFieldEnum]
@@ -4976,6 +5024,13 @@ export namespace Prisma {
 
   export type UserOrderByRelevanceFieldEnum =
     (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+  export const NullsOrder: {
+    first: 'first'
+    last: 'last'
+  }
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
   export const IdeaOrderByRelevanceFieldEnum: {
     id: 'id'
@@ -5026,6 +5081,22 @@ export namespace Prisma {
   >
 
   /**
+   * Reference to a field of type 'UserPermission[]'
+   */
+  export type ListEnumUserPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'UserPermission[]'
+  >
+
+  /**
+   * Reference to a field of type 'UserPermission'
+   */
+  export type EnumUserPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<
+    $PrismaModel,
+    'UserPermission'
+  >
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -5058,6 +5129,7 @@ export namespace Prisma {
     name?: StringFilter<'User'> | string
     password?: StringFilter<'User'> | string
     createdAt?: DateTimeFilter<'User'> | Date | string
+    permissions?: EnumUserPermissionNullableListFilter<'User'>
     ideas?: IdeaListRelationFilter
     ideasLikes?: IdeaLikeListRelationFilter
   }
@@ -5068,6 +5140,7 @@ export namespace Prisma {
     name?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    permissions?: SortOrder
     ideas?: IdeaOrderByRelationAggregateInput
     ideasLikes?: IdeaLikeOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
@@ -5083,6 +5156,7 @@ export namespace Prisma {
       name?: StringFilter<'User'> | string
       password?: StringFilter<'User'> | string
       createdAt?: DateTimeFilter<'User'> | Date | string
+      permissions?: EnumUserPermissionNullableListFilter<'User'>
       ideas?: IdeaListRelationFilter
       ideasLikes?: IdeaLikeListRelationFilter
     },
@@ -5095,6 +5169,7 @@ export namespace Prisma {
     name?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    permissions?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -5109,6 +5184,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<'User'> | string
     password?: StringWithAggregatesFilter<'User'> | string
     createdAt?: DateTimeWithAggregatesFilter<'User'> | Date | string
+    permissions?: EnumUserPermissionNullableListFilter<'User'>
   }
 
   export type IdeaWhereInput = {
@@ -5123,6 +5199,7 @@ export namespace Prisma {
     text?: StringFilter<'Idea'> | string
     createdAt?: DateTimeFilter<'Idea'> | Date | string
     authorId?: StringFilter<'Idea'> | string
+    blockedAt?: DateTimeNullableFilter<'Idea'> | Date | string | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     ideasLikes?: IdeaLikeListRelationFilter
   }
@@ -5136,6 +5213,7 @@ export namespace Prisma {
     text?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    blockedAt?: SortOrderInput | SortOrder
     author?: UserOrderByWithRelationInput
     ideasLikes?: IdeaLikeOrderByRelationAggregateInput
     _relevance?: IdeaOrderByRelevanceInput
@@ -5154,6 +5232,7 @@ export namespace Prisma {
       text?: StringFilter<'Idea'> | string
       createdAt?: DateTimeFilter<'Idea'> | Date | string
       authorId?: StringFilter<'Idea'> | string
+      blockedAt?: DateTimeNullableFilter<'Idea'> | Date | string | null
       author?: XOR<UserScalarRelationFilter, UserWhereInput>
       ideasLikes?: IdeaLikeListRelationFilter
     },
@@ -5169,6 +5248,7 @@ export namespace Prisma {
     text?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    blockedAt?: SortOrderInput | SortOrder
     _count?: IdeaCountOrderByAggregateInput
     _avg?: IdeaAvgOrderByAggregateInput
     _max?: IdeaMaxOrderByAggregateInput
@@ -5188,6 +5268,7 @@ export namespace Prisma {
     text?: StringWithAggregatesFilter<'Idea'> | string
     createdAt?: DateTimeWithAggregatesFilter<'Idea'> | Date | string
     authorId?: StringWithAggregatesFilter<'Idea'> | string
+    blockedAt?: DateTimeNullableWithAggregatesFilter<'Idea'> | Date | string | null
   }
 
   export type IdeaLikeWhereInput = {
@@ -5254,6 +5335,7 @@ export namespace Prisma {
     name?: string
     password: string
     createdAt?: Date | string
+    permissions?: UserCreatepermissionsInput | $Enums.UserPermission[]
     ideas?: IdeaCreateNestedManyWithoutAuthorInput
     ideasLikes?: IdeaLikeCreateNestedManyWithoutUserInput
   }
@@ -5264,6 +5346,7 @@ export namespace Prisma {
     name?: string
     password: string
     createdAt?: Date | string
+    permissions?: UserCreatepermissionsInput | $Enums.UserPermission[]
     ideas?: IdeaUncheckedCreateNestedManyWithoutAuthorInput
     ideasLikes?: IdeaLikeUncheckedCreateNestedManyWithoutUserInput
   }
@@ -5274,6 +5357,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserUpdatepermissionsInput | $Enums.UserPermission[]
     ideas?: IdeaUpdateManyWithoutAuthorNestedInput
     ideasLikes?: IdeaLikeUpdateManyWithoutUserNestedInput
   }
@@ -5284,6 +5368,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserUpdatepermissionsInput | $Enums.UserPermission[]
     ideas?: IdeaUncheckedUpdateManyWithoutAuthorNestedInput
     ideasLikes?: IdeaLikeUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -5294,6 +5379,7 @@ export namespace Prisma {
     name?: string
     password: string
     createdAt?: Date | string
+    permissions?: UserCreatepermissionsInput | $Enums.UserPermission[]
   }
 
   export type UserUpdateManyMutationInput = {
@@ -5302,6 +5388,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserUpdatepermissionsInput | $Enums.UserPermission[]
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -5310,6 +5397,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserUpdatepermissionsInput | $Enums.UserPermission[]
   }
 
   export type IdeaCreateInput = {
@@ -5320,6 +5408,7 @@ export namespace Prisma {
     description: string
     text: string
     createdAt?: Date | string
+    blockedAt?: Date | string | null
     author: UserCreateNestedOneWithoutIdeasInput
     ideasLikes?: IdeaLikeCreateNestedManyWithoutIdeaInput
   }
@@ -5333,6 +5422,7 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     authorId: string
+    blockedAt?: Date | string | null
     ideasLikes?: IdeaLikeUncheckedCreateNestedManyWithoutIdeaInput
   }
 
@@ -5343,6 +5433,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     author?: UserUpdateOneRequiredWithoutIdeasNestedInput
     ideasLikes?: IdeaLikeUpdateManyWithoutIdeaNestedInput
   }
@@ -5356,6 +5447,7 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ideasLikes?: IdeaLikeUncheckedUpdateManyWithoutIdeaNestedInput
   }
 
@@ -5368,6 +5460,7 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     authorId: string
+    blockedAt?: Date | string | null
   }
 
   export type IdeaUpdateManyMutationInput = {
@@ -5377,6 +5470,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IdeaUncheckedUpdateManyInput = {
@@ -5388,6 +5482,7 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IdeaLikeCreateInput = {
@@ -5464,6 +5559,14 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type EnumUserPermissionNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserPermission[] | ListEnumUserPermissionFieldRefInput<$PrismaModel> | null
+    has?: $Enums.UserPermission | EnumUserPermissionFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.UserPermission[] | ListEnumUserPermissionFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.UserPermission[] | ListEnumUserPermissionFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type IdeaListRelationFilter = {
     every?: IdeaWhereInput
     some?: IdeaWhereInput
@@ -5496,6 +5599,7 @@ export namespace Prisma {
     name?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    permissions?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5558,9 +5662,25 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type IdeaOrderByRelevanceInput = {
@@ -5578,6 +5698,7 @@ export namespace Prisma {
     text?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    blockedAt?: SortOrder
   }
 
   export type IdeaAvgOrderByAggregateInput = {
@@ -5593,6 +5714,7 @@ export namespace Prisma {
     text?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    blockedAt?: SortOrder
   }
 
   export type IdeaMinOrderByAggregateInput = {
@@ -5604,6 +5726,7 @@ export namespace Prisma {
     text?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    blockedAt?: SortOrder
   }
 
   export type IdeaSumOrderByAggregateInput = {
@@ -5624,6 +5747,20 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type IdeaScalarRelationFilter = {
@@ -5661,6 +5798,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     ideaId?: SortOrder
     userId?: SortOrder
+  }
+
+  export type UserCreatepermissionsInput = {
+    set: $Enums.UserPermission[]
   }
 
   export type IdeaCreateNestedManyWithoutAuthorInput = {
@@ -5717,6 +5858,11 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type UserUpdatepermissionsInput = {
+    set?: $Enums.UserPermission[]
+    push?: $Enums.UserPermission | $Enums.UserPermission[]
   }
 
   export type IdeaUpdateManyWithoutAuthorNestedInput = {
@@ -5847,6 +5993,10 @@ export namespace Prisma {
       | IdeaLikeCreateOrConnectWithoutIdeaInput[]
     createMany?: IdeaLikeCreateManyIdeaInputEnvelope
     connect?: IdeaLikeWhereUniqueInput | IdeaLikeWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type UserUpdateOneRequiredWithoutIdeasNestedInput = {
@@ -6021,6 +6171,17 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -6048,6 +6209,31 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type IdeaCreateWithoutAuthorInput = {
     id?: string
     nick: string
@@ -6056,6 +6242,7 @@ export namespace Prisma {
     description: string
     text: string
     createdAt?: Date | string
+    blockedAt?: Date | string | null
     ideasLikes?: IdeaLikeCreateNestedManyWithoutIdeaInput
   }
 
@@ -6067,6 +6254,7 @@ export namespace Prisma {
     description: string
     text: string
     createdAt?: Date | string
+    blockedAt?: Date | string | null
     ideasLikes?: IdeaLikeUncheckedCreateNestedManyWithoutIdeaInput
   }
 
@@ -6130,6 +6318,7 @@ export namespace Prisma {
     text?: StringFilter<'Idea'> | string
     createdAt?: DateTimeFilter<'Idea'> | Date | string
     authorId?: StringFilter<'Idea'> | string
+    blockedAt?: DateTimeNullableFilter<'Idea'> | Date | string | null
   }
 
   export type IdeaLikeUpsertWithWhereUniqueWithoutUserInput = {
@@ -6164,6 +6353,7 @@ export namespace Prisma {
     name?: string
     password: string
     createdAt?: Date | string
+    permissions?: UserCreatepermissionsInput | $Enums.UserPermission[]
     ideasLikes?: IdeaLikeCreateNestedManyWithoutUserInput
   }
 
@@ -6173,6 +6363,7 @@ export namespace Prisma {
     name?: string
     password: string
     createdAt?: Date | string
+    permissions?: UserCreatepermissionsInput | $Enums.UserPermission[]
     ideasLikes?: IdeaLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -6220,6 +6411,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserUpdatepermissionsInput | $Enums.UserPermission[]
     ideasLikes?: IdeaLikeUpdateManyWithoutUserNestedInput
   }
 
@@ -6229,6 +6421,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserUpdatepermissionsInput | $Enums.UserPermission[]
     ideasLikes?: IdeaLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -6256,6 +6449,7 @@ export namespace Prisma {
     description: string
     text: string
     createdAt?: Date | string
+    blockedAt?: Date | string | null
     author: UserCreateNestedOneWithoutIdeasInput
   }
 
@@ -6268,6 +6462,7 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     authorId: string
+    blockedAt?: Date | string | null
   }
 
   export type IdeaCreateOrConnectWithoutIdeasLikesInput = {
@@ -6281,6 +6476,7 @@ export namespace Prisma {
     name?: string
     password: string
     createdAt?: Date | string
+    permissions?: UserCreatepermissionsInput | $Enums.UserPermission[]
     ideas?: IdeaCreateNestedManyWithoutAuthorInput
   }
 
@@ -6290,6 +6486,7 @@ export namespace Prisma {
     name?: string
     password: string
     createdAt?: Date | string
+    permissions?: UserCreatepermissionsInput | $Enums.UserPermission[]
     ideas?: IdeaUncheckedCreateNestedManyWithoutAuthorInput
   }
 
@@ -6316,6 +6513,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     author?: UserUpdateOneRequiredWithoutIdeasNestedInput
   }
 
@@ -6328,6 +6526,7 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUpsertWithoutIdeasLikesInput = {
@@ -6347,6 +6546,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserUpdatepermissionsInput | $Enums.UserPermission[]
     ideas?: IdeaUpdateManyWithoutAuthorNestedInput
   }
 
@@ -6356,6 +6556,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserUpdatepermissionsInput | $Enums.UserPermission[]
     ideas?: IdeaUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
@@ -6367,6 +6568,7 @@ export namespace Prisma {
     description: string
     text: string
     createdAt?: Date | string
+    blockedAt?: Date | string | null
   }
 
   export type IdeaLikeCreateManyUserInput = {
@@ -6382,6 +6584,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ideasLikes?: IdeaLikeUpdateManyWithoutIdeaNestedInput
   }
 
@@ -6393,6 +6596,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ideasLikes?: IdeaLikeUncheckedUpdateManyWithoutIdeaNestedInput
   }
 
@@ -6404,6 +6608,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IdeaLikeUpdateWithoutUserInput = {

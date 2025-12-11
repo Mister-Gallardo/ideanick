@@ -74,6 +74,7 @@ export default defineConfig([
                 '@ideanick/backend/**',
                 '!@ideanick/backend/**/',
                 '!@ideanick/backend/**/input',
+                '!@ideanick/backend/**/can',
               ],
               allowTypeImports: true,
               message:

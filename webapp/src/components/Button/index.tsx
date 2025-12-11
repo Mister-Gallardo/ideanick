@@ -2,14 +2,17 @@ import { Link } from 'react-router-dom'
 
 import css from './index.module.scss'
 
-export type ButtonProps = { children: React.ReactNode; loading?: boolean }
+type ButtonColor = 'red' | 'green'
 
-export const Button = ({ children, loading = false }: ButtonProps) => {
+export type ButtonProps = { children: React.ReactNode; loading?: boolean; color?: ButtonColor }
+
+export const Button = ({ children, loading = false, color }: ButtonProps) => {
   return (
     <button
       className={`${css.button} ${loading ? css.loading : ''}`}
       type="submit"
       disabled={loading}
+      style={{ backgroundColor: color }}
     >
       {loading ? 'Submitting...' : children}
     </button>

@@ -122,6 +122,7 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   password: 'password',
   createdAt: 'createdAt',
+  permissions: 'permissions',
 }
 
 exports.Prisma.IdeaScalarFieldEnum = {
@@ -133,6 +134,7 @@ exports.Prisma.IdeaScalarFieldEnum = {
   text: 'text',
   createdAt: 'createdAt',
   authorId: 'authorId',
+  blockedAt: 'blockedAt',
 }
 
 exports.Prisma.IdeaLikeScalarFieldEnum = {
@@ -159,6 +161,11 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   password: 'password',
 }
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last',
+}
+
 exports.Prisma.IdeaOrderByRelevanceFieldEnum = {
   id: 'id',
   nick: 'nick',
@@ -172,6 +179,10 @@ exports.Prisma.IdeaLikeOrderByRelevanceFieldEnum = {
   id: 'id',
   ideaId: 'ideaId',
   userId: 'userId',
+}
+exports.UserPermission = exports.$Enums.UserPermission = {
+  BLOCK_IDEAS: 'BLOCK_IDEAS',
+  ALL: 'ALL',
 }
 
 exports.Prisma.ModelName = {

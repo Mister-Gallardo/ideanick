@@ -2,6 +2,7 @@ import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
 
 import { trpc } from '../lib/trpc.js'
 
+import { blockIdeaTrpcRoute } from './blockIdea/index.js'
 import { createIdeaTrpcRoute } from './createIdea/index.js'
 import { getIdeaTrpcRoute } from './getIdea/index.js'
 import { getIdeasTrpcRoute } from './getIdeas/index.js'
@@ -24,6 +25,7 @@ export const trpcRouter = trpc.router({
   updateProfile: updateProfileTrpcRoute,
   updatePassword: updatePasswordTrpcRoute,
   setIdeaLike: setIdeaLikeTrpcRoute,
+  blockIdea: blockIdeaTrpcRoute,
 })
 
 export type TrpcRouter = typeof trpcRouter

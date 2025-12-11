@@ -16,6 +16,7 @@
 .text {
   @include mixins.paragraph(md, regular);
   margin-top: $unit * 5;
+  word-break: break-all;
 
   & > *:not(:first-child) {
     margin-top: $unit * 2;
@@ -31,5 +32,9 @@
 }
 
 .editButton {
+  margin-top: $unit * 5;
+}
+
+.blockIdea {
   margin-top: $unit * 5;
 }

@@ -33,6 +33,10 @@ export const getIdeaTrpcRoute = trpc.procedure
       },
     })
 
+    if (rawIdea?.blockedAt) {
+      throw new Error('Idea is blocked by administrator')
+    }
+
     if (!rawIdea) {
       throw new Error('Idea not found')
     }

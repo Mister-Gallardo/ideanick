@@ -1,4 +1,5 @@
 import { trpc } from '../../lib/trpc.js'
+import { canEditIdea } from '../../utils/can.js'
 
 import { zUpdateIdeaTrpcInput } from './input.js'
 
@@ -17,7 +18,7 @@ export const updateIdeaTrpcRoute = trpc.procedure
     if (!idea) {
       throw new Error('NOT_FOUND')
     }
-    if (ctx.me.id !== idea.authorId) {
+    if (!canEditIdea(ctx.me, idea)) {
       throw new Error('NOT_YOUR_IDEA')
     }
     if (idea.nick !== input.nick) {

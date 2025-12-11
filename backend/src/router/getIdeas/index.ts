@@ -22,34 +22,37 @@ export const getIdeasTrpcRoute = trpc.procedure
           },
         },
       },
-      where: !input.search
-        ? undefined
-        : {
-            OR: [
-              {
-                name: {
-                  // search - более мощный и быстрый инструмент,
-                  // но принимающий в качестве normalizedSearch строку не менее 3х символов.
-                  // слова до 3х символов просто не будут обработаны и вернётся пустой результат
-                  // search: normalizedSearch,
-                  contains: normalizedSearch,
-                  mode: 'insensitive',
+      where: {
+        blockedAt: null,
+        ...(!normalizedSearch
+          ? {}
+          : {
+              OR: [
+                {
+                  name: {
+                    // search - более мощный и быстрый инструмент,
+                    // но принимающий в качестве normalizedSearch строку не менее 3х символов.
+                    // слова до 3х символов просто не будут обработаны и вернётся пустой результат
+                    // search: normalizedSearch,
+                    contains: normalizedSearch,
+                    mode: 'insensitive',
+                  },
                 },
-              },
-              {
-                description: {
-                  contains: normalizedSearch,
-                  mode: 'insensitive',
+                {
+                  description: {
+                    contains: normalizedSearch,
+                    mode: 'insensitive',
+                  },
                 },
-              },
-              {
-                text: {
-                  contains: normalizedSearch,
-                  mode: 'insensitive',
+                {
+                  text: {
+                    contains: normalizedSearch,
+                    mode: 'insensitive',
+                  },
                 },
-              },
-            ],
-          },
+              ],
+            }),
+      },
       orderBy: [
         {
           createdAt: 'desc',
@@ -61,9 +64,6 @@ export const getIdeasTrpcRoute = trpc.procedure
       cursor: input.cursor ? { serialNumber: input.cursor } : undefined,
       take: input.limit + 1,
     })
-
-    console.log('1' + normalizedSearch + '1')
-    console.log(rawIdeas)
 
     const nextIdea = rawIdeas.at(input.limit)
     const nextCursor = nextIdea?.serialNumber

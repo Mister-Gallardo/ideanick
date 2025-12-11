@@ -20,7 +20,7 @@ export const useForm = <TZodSchema extends z.ZodObject<any>>({
   successMessage?: string | false
   resetOnSuccess?: boolean
   showValidationAlert?: boolean
-  initialValues: z.infer<TZodSchema>
+  initialValues?: z.infer<TZodSchema>
   validationSchema?: TZodSchema
   onSubmit?: (
     values: z.infer<TZodSchema>,
@@ -31,7 +31,7 @@ export const useForm = <TZodSchema extends z.ZodObject<any>>({
   const [submittingError, setSubmittingError] = useState<Error | null>(null)
 
   const formik = useFormik<z.infer<TZodSchema>>({
-    initialValues,
+    initialValues: initialValues || ({} as z.infer<TZodSchema>),
     ...(validationSchema && { validationSchema: toFormikValidationSchema(validationSchema) }),
     onSubmit: async (values, formikHelpers) => {
       if (!onSubmit) {
