@@ -8,12 +8,15 @@ import { Input } from '../../components/Input'
 import Segment from '../../components/Segment'
 import { layoutContentElRef } from '../../components/layouts'
 import { useForm } from '../../lib/form'
+import { withPageWrapper } from '../../lib/pageWrapper'
 import { getViewIdeaRoute } from '../../lib/routes/routeHelpers'
 import { trpc } from '../../lib/trpc'
 
 import css from './include.module.scss'
 
-const AllIdeasPage = () => {
+export const AllIdeasPage = withPageWrapper({
+  title: 'All Idea - IdeaNick',
+})(() => {
   const { formik } = useForm({
     initialValues: { search: '' },
     validationSchema: zGetIdeasTrpcInput.pick({ search: true }),
@@ -93,5 +96,5 @@ const AllIdeasPage = () => {
       )}
     </Segment>
   )
-}
+})
 export default AllIdeasPage

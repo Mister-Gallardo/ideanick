@@ -28,6 +28,7 @@ export const EditIdeaPage = withPageWrapper({
   setProps: ({ queryResult }) => ({
     idea: queryResult.data.idea,
   }),
+  title: 'Edit Idea - IdeaNick',
 })(({ idea }) => {
   const navigate = useNavigate()
   const updateIdea = trpc.updateIdea.useMutation()

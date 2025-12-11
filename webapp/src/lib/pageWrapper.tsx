@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type UseTRPCQueryResult, type UseTRPCQuerySuccessResult } from '@trpc/react-query/shared'
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 
 import { ErrorPageComponent } from '../components/ErrorPageComponent'
@@ -38,6 +39,8 @@ type PageWrapperProps<TProps extends Props, TQueryResult extends QueryResult | u
 
   showLoaderOnFetching?: boolean
 
+  title: string
+
   useQuery?: () => TQueryResult
   setProps?: (helperProps: HelperProps<TQueryResult>) => TProps
   Page: React.FC<TProps>
@@ -57,6 +60,7 @@ const PageWrapper = <
   checkExists,
   checkExistsTitle = 'Not Found',
   checkExistsMessage = 'This page does not exist',
+  title,
   useQuery,
   setProps,
   Page,
@@ -107,7 +111,14 @@ const PageWrapper = <
   }
 
   const props = setProps?.(helperProps) as TProps
-  return <Page {...props} />
+  return (
+    <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <Page {...props} />
+    </>
+  )
 }
 
 export const withPageWrapper = <

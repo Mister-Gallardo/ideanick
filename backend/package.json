@@ -6,7 +6,7 @@
     "dev": "pnpm pgc && tsx watch ./src/index.ts",
     "build": "rimraf ./dist && tsc -p tsconfig.json",
     "start": "node ./dist/index.js",
-    "pmd": "prisma migrate dev && pnpm pgc",
+    "pmd": "prisma migrate dev",
     "pgc": "prisma generate",
     "types": "tsc --noEmit --project ./tsconfig.json",
     "prettify": "prettier --log-level warn --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",

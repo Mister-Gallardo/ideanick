@@ -2,6 +2,7 @@ import type { TrpcRouterOutput } from '@ideanick/backend/src/router'
 import { canBlockIdeas, canEditIdea } from '@ideanick/backend/src/utils/can'
 import { useParams } from 'react-router-dom'
 
+import HeartIcon from '../../assets/icons/heart.svg?react'
 import { Alert } from '../../components/Alert'
 import { Button, LinkButton } from '../../components/Button'
 import { FormItems } from '../../components/FormItems'
@@ -57,12 +58,13 @@ const LikeButton = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getIdea']['i
   })
   return (
     <button
-      className={css.likeButton}
+      className={`${css.likeButton} ${idea.isLikedByMe ? css.liked : ''}`}
       onClick={() => {
         void setIdeaLike.mutateAsync({ ideaId: idea.id, isLikedByMe: !idea.isLikedByMe })
       }}
     >
-      {idea.isLikedByMe ? 'Unlike' : 'Like'}
+      <HeartIcon className={css.heartIcon} />
+      {/* Убрал текст 'Like'/'Unlike', оставил только иконку */}
     </button>
   )
 }
@@ -106,6 +108,7 @@ export const ViewIdeaPage = withPageWrapper({
     me: ctx.me,
   }),
   showLoaderOnFetching: false,
+  title: 'View Idea - IdeaNick',
 })(({ idea, me }) => (
   <Segment title={idea.name} description={idea.description}>
     <div className={css.createdAt}>Created At: {idea.createdAt.toLocaleDateString('ru-RU')}</div>

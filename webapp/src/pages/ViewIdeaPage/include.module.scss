@@ -26,8 +26,27 @@
 .likes {
   margin-top: 20px;
 
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
   .likeButton {
-    @include mixins.link;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    color: transparent;
+    transition: color 0.3s ease;
+
+    &.liked {
+      color: #ff0000;
+
+      .heartIcon {
+        fill: currentcolor;
+        stroke: currentcolor;
+      }
+    }
   }
 }
 
@@ -37,4 +56,14 @@
 
 .blockIdea {
   margin-top: $unit * 5;
+}
+
+.heartIcon {
+  width: 24px;
+  height: 24px;
+
+  fill: transparent;
+  stroke: black;
+  stroke-width: 2;
+  transition: fill 0.3s ease;
 }

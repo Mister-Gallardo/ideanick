@@ -86,6 +86,7 @@ export const EditProfilePage = withPageWrapper({
   setProps: ({ ctx }) => ({
     me: ctx.me!,
   }),
+  title: 'Edit Profile - IdeaNick',
 })(({ me }) => {
   return (
     <Segment title="Edit Profile">

@@ -13,6 +13,7 @@ import { getAllIdeasRoute } from '../../lib/routes/routeHelpers'
 import { trpc } from '../../lib/trpc'
 
 export const SignInPage = withPageWrapper({
+  title: 'Sign In - IdeaNick',
   redirectAuthorized: true,
 })(() => {
   const navigate = useNavigate()
