@@ -1,3 +1,4 @@
+import { sendWelcomeEmail } from '../../lib/emails.js'
 import { trpc } from '../../lib/trpc.js'
 import getPasswordHash from '../../utils/getPasswordHash.js'
 import { signJWT } from '../../utils/signJWT.js'
@@ -33,6 +34,8 @@ export const signUpTrpcRoute = trpc.procedure
         password: hashedPassword,
       },
     })
+
+    void sendWelcomeEmail({ user })
 
     const token = signJWT(user.id)
 

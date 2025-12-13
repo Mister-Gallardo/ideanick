@@ -1,3 +1,4 @@
+import { sendIdeaBlockedEmail } from '../../lib/emails.js'
 import { trpc } from '../../lib/trpc.js'
 import { canBlockIdeas } from '../../utils/can.js'
 
@@ -14,6 +15,9 @@ export const blockIdeaTrpcRoute = trpc.procedure
       where: {
         id: ideaId,
       },
+      include: {
+        author: true,
+      },
     })
     if (!idea) {
       throw new Error('NOT_FOUND')
@@ -26,5 +30,8 @@ export const blockIdeaTrpcRoute = trpc.procedure
         blockedAt: new Date(),
       },
     })
+
+    void sendIdeaBlockedEmail({ user: idea.author, idea })
+
     return true
   })
